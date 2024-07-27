@@ -6,35 +6,21 @@ import { label, productCategoryFormSchema, type IProductCategoryForm } from '~/v
 // ** useHooks
 const categoryList = useProductCategoryDataList()
 const { isPending, mutateAsync } = useProductCategoryFormInput()
+const { data, links } = await useProductCategoryRetrieve()
 
 const { handleSubmit, setFieldValue } = useForm<IProductCategoryForm>({
-    validationSchema: productCategoryFormSchema
+    validationSchema: productCategoryFormSchema,
+    initialValues: _omitBy(data.value, _isNil)
 })
-
-// ** Data
-const isOpen = ref<boolean>(false)
 
 // ** Methods
-const onSubmit = handleSubmit(async values => {
-    await mutateAsync(values)
-    isOpen.value = false
-})
+const onSubmit = handleSubmit(values => mutateAsync(values))
 </script>
 
 <template>
-    <UButton
-        icon="i-heroicons-plus"
-        size="sm"
-        color="primary"
-        variant="solid"
-        label="Thêm Mới"
-        :trailing="false"
-        @click="isOpen = true"
-    />
-
-    <UModal
-        v-model="isOpen"
-        prevent-close
+    <BaseRetrieve
+        :title="`Cập nhật danh mục: ${data.name}`"
+        :links="links"
     >
         <UForm
             :state="productCategoryFormSchema"
@@ -42,15 +28,7 @@ const onSubmit = handleSubmit(async values => {
         >
             <UCard>
                 <template #header>
-                    <BaseCardTitle title="Thêm mới danh mục">
-                        <UButton
-                            color="gray"
-                            variant="ghost"
-                            icon="i-heroicons-x-mark-20-solid"
-                            class="-my-1"
-                            @click="isOpen = false"
-                        />
-                    </BaseCardTitle>
+                    <BaseCardTitle title="Thông tin chi tiết" />
                 </template>
 
                 <div class="grid gap-4 grid-cols-12">
@@ -116,8 +94,8 @@ const onSubmit = handleSubmit(async values => {
                                 type="submit"
                                 size="sm"
                                 variant="solid"
-                                label="Thêm Mới"
-                                :loading="isPending"
+                                label="Cập Nhật"
+                                :loading="Boolean(isPending)"
                                 :trailing="false"
                             />
 
@@ -126,14 +104,14 @@ const onSubmit = handleSubmit(async values => {
                                 size="sm"
                                 color="gray"
                                 variant="solid"
-                                label="Huỷ Bỏ"
+                                label="Quay Lại"
                                 :trailing="false"
-                                @click="isOpen = false"
+                                @click="$router.go(-1)"
                             />
                         </div>
                     </div>
                 </div>
             </UCard>
         </UForm>
-    </UModal>
+    </BaseRetrieve>
 </template>

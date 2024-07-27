@@ -2,16 +2,16 @@
     <section>
         <BaseTitle
             label="Quản lý sản phẩm"
-            title="Danh mục"
+            title="Thuộc tính"
         />
 
         <div class="mt-8 pb-24 max-w-none">
-            <BaseDataTableCard title="Danh sách danh mục">
+            <BaseDataTableCard title="Danh sách thuộc tính">
                 <template #create>
-                    <ProductCategoryCreate />
+                    <ProductAttributeCreate />
                 </template>
 
-                <ProductCategoryDataTable />
+                <ProductAttributeDataTable />
             </BaseDataTableCard>
         </div>
     </section>

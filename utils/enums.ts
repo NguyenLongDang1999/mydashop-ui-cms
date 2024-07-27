@@ -68,7 +68,6 @@ export enum MESSAGE {
     CONFLICT = 'Dữ liệu này đã tồn tại trong hệ thống!'
 }
 
-
 export enum AUTH {
     ACCESS_TOKEN = 'accessTokenAdmin',
     REFRESH_TOKEN = 'refreshTokenAdmin',
@@ -76,4 +75,22 @@ export enum AUTH {
 
 export enum FORMAT {
     DATE_TIME = 'DD-MM-YYYY HH:mm'
+}
+
+export enum STATUS {
+    ACTIVE = 10,
+    INACTIVE = 20
+}
+
+export enum PAGE {
+    CURRENT = 1,
+    SIZE = 10
+}
+
+export enum PATH {
+    BUNNY_CDN_URL = 'https://nuxivy.b-cdn.net/'
+}
+
+export enum IMAGE {
+    DEFAULT = '/default.jpg'
 }

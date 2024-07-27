@@ -1,14 +1,14 @@
 <script setup lang="ts">
 
 // ** Validations Imports
-import { label, productCategoryFormSchema, type IProductCategoryForm } from '~/validations/product-category';
+import { label, productBrandFormSchema, type IProductBrandForm } from '~/validations/product-brand';
 
 // ** useHooks
 const categoryList = useProductCategoryDataList()
-const { isPending, mutateAsync } = useProductCategoryFormInput()
+const { isPending, mutateAsync } = useProductBrandFormInput()
 
-const { handleSubmit, setFieldValue } = useForm<IProductCategoryForm>({
-    validationSchema: productCategoryFormSchema
+const { handleSubmit, setFieldValue } = useForm<IProductBrandForm>({
+    validationSchema: productBrandFormSchema
 })
 
 // ** Data
@@ -37,20 +37,14 @@ const onSubmit = handleSubmit(async values => {
         prevent-close
     >
         <UForm
-            :state="productCategoryFormSchema"
+            :state="productBrandFormSchema"
             @submit="onSubmit"
         >
             <UCard>
                 <template #header>
-                    <BaseCardTitle title="Thêm mới danh mục">
-                        <UButton
-                            color="gray"
-                            variant="ghost"
-                            icon="i-heroicons-x-mark-20-solid"
-                            class="-my-1"
-                            @click="isOpen = false"
-                        />
-                    </BaseCardTitle>
+                    <h2 class="capitalize my-0 font-semibold text-xl text-gray-900 dark:text-white leading-tight">
+                        Thêm mới thương hiệu
+                    </h2>
                 </template>
 
                 <div class="grid gap-4 grid-cols-12">
@@ -75,9 +69,10 @@ const onSubmit = handleSubmit(async values => {
 
                     <div class="sm:col-span-6 col-span-12">
                         <FormSelect
-                            :label="label.parent_id"
+                            :label="label.product_category_id"
                             :options="categoryList"
-                            name="parent_id"
+                            name="product_category_id"
+                            multiple
                         />
                     </div>
 
@@ -97,27 +92,13 @@ const onSubmit = handleSubmit(async values => {
                     </div>
 
                     <div class="col-span-12">
-                        <FormTextarea
-                            :label="label.meta_title"
-                            name="meta_title"
-                        />
-                    </div>
-
-                    <div class="col-span-12">
-                        <FormTextarea
-                            :label="label.meta_description"
-                            name="meta_description"
-                        />
-                    </div>
-
-                    <div class="col-span-12">
                         <div class="flex justify-start gap-4">
                             <UButton
                                 type="submit"
                                 size="sm"
                                 variant="solid"
                                 label="Thêm Mới"
-                                :loading="isPending"
+                                :loading="Boolean(isPending)"
                                 :trailing="false"
                             />
 

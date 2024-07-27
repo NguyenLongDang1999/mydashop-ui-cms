@@ -1,11 +1,13 @@
 <script setup lang="ts">
 
 // ** Validations Imports
-import type { IAuthLoginForm } from '~/validations/auth'
-import { authLoginSchema, label } from '~/validations/auth'
+import type { IAuthLoginForm } from '~/validations/auth';
+import { authLoginSchema, label } from '~/validations/auth';
 
 // ** Layout
-definePageMeta({ layout: 'auth' })
+definePageMeta({
+    layout: 'auth'
+})
 
 // ** useHooks
 const { handleSubmit } = useForm<IAuthLoginForm>({
@@ -29,7 +31,7 @@ const onSubmit = handleSubmit(values => mutateAsync(values))
                 </h1>
 
                 <UForm
-                    :state="{}"
+                    :state="authLoginSchema"
                     class="space-y-4 md:space-y-6"
                     @submit="onSubmit"
                 >

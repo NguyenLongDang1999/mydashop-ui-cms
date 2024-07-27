@@ -1,17 +1,17 @@
 <script setup lang="ts">
 
 // ** Types Imports
-import type { DropdownItem } from '#ui/types'
+import type { DropdownItem } from '#ui/types';
 
 // ** useHooks
-// const { data } = await useAuthProfile()
-// const { refetch } = useAuthLogout()
+const { data } = await useAuthProfile()
+const { refetch } = useAuthLogout()
 
 // ** Data
 const items: DropdownItem[][] = [
     [
         {
-            label: 'Admin',
+            label: data.value?.email,
             slot: 'account',
             disabled: true
         }
@@ -71,7 +71,7 @@ const items: DropdownItem[][] = [
                         :popper="{ placement: 'bottom-start' }"
                     >
                         <div class="flex items-center gap-2">
-                            <span>Admin</span>
+                            <span>{{ data.name }}</span>
                             <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" />
                         </div>
 

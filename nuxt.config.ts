@@ -5,7 +5,9 @@ export default defineNuxtConfig({
     modules: [
         '@nuxt/ui',
         '@nuxtjs/google-fonts',
-        '@vee-validate/nuxt'
+        '@vee-validate/nuxt',
+        '@vueuse/nuxt',
+        'nuxt-lodash'
     ],
     ssr: false,
     googleFonts: {
@@ -23,4 +25,9 @@ export default defineNuxtConfig({
             apiBase: process.env.NUXT_PUBLIC_API_BASE
         }
     },
+    lodash: {
+        prefix: '_',
+        prefixSkip: ['string'],
+        upperAfterPrefix: false
+    }
 })

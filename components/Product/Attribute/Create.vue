@@ -1,14 +1,14 @@
 <script setup lang="ts">
 
 // ** Validations Imports
-import { label, productCategoryFormSchema, type IProductCategoryForm } from '~/validations/product-category';
+import { label, productAttributeFormSchema, type IProductAttributeForm } from '~/validations/product-attribute';
 
 // ** useHooks
 const categoryList = useProductCategoryDataList()
-const { isPending, mutateAsync } = useProductCategoryFormInput()
+const { isPending, mutateAsync } = useProductAttributeFormInput()
 
-const { handleSubmit, setFieldValue } = useForm<IProductCategoryForm>({
-    validationSchema: productCategoryFormSchema
+const { handleSubmit, values: productAttribute, setFieldValue } = useForm<IProductAttributeForm>({
+    validationSchema: productAttributeFormSchema
 })
 
 // ** Data
@@ -37,25 +37,21 @@ const onSubmit = handleSubmit(async values => {
         prevent-close
     >
         <UForm
-            :state="productCategoryFormSchema"
+            :state="productAttributeFormSchema"
             @submit="onSubmit"
         >
             <UCard>
                 <template #header>
-                    <BaseCardTitle title="Thêm mới danh mục">
-                        <UButton
-                            color="gray"
-                            variant="ghost"
-                            icon="i-heroicons-x-mark-20-solid"
-                            class="-my-1"
-                            @click="isOpen = false"
-                        />
-                    </BaseCardTitle>
+                    <h2 class="capitalize my-0 font-semibold text-xl text-gray-900 dark:text-white leading-tight">
+                        Thêm mới thuộc tính
+                    </h2>
                 </template>
 
                 <div class="grid gap-4 grid-cols-12">
                     <div class="col-span-12">
-                        <FormUpload />
+                        <p class="text-sm/6 font-semibold flex items-center gap-1.5 capitalize">
+                            1. Thông tin chung
+                        </p>
                     </div>
 
                     <div class="sm:col-span-6 col-span-12">
@@ -75,9 +71,10 @@ const onSubmit = handleSubmit(async values => {
 
                     <div class="sm:col-span-6 col-span-12">
                         <FormSelect
-                            :label="label.parent_id"
+                            :label="label.product_category_id"
                             :options="categoryList"
-                            name="parent_id"
+                            name="product_category_id"
+                            multiple
                         />
                     </div>
 
@@ -97,17 +94,53 @@ const onSubmit = handleSubmit(async values => {
                     </div>
 
                     <div class="col-span-12">
-                        <FormTextarea
-                            :label="label.meta_title"
-                            name="meta_title"
-                        />
+                        <p class="text-sm/6 font-semibold flex items-center gap-1.5 capitalize">
+                            2. Thêm giá trị thuộc tính
+                        </p>
                     </div>
 
                     <div class="col-span-12">
-                        <FormTextarea
-                            :label="label.meta_description"
-                            name="meta_description"
-                        />
+                        <FieldArray
+                            v-slot="{ push, remove }"
+                            name="product_attribute_values"
+                        >
+                            <UButton
+                                icon="i-heroicons-plus"
+                                size="sm"
+                                color="primary"
+                                variant="solid"
+                                label="Thêm Giá Trị"
+                                :trailing="false"
+                                @click="push({ value: '' })"
+                            />
+
+                            <div class="flex flex-col gap-4 mt-4">
+                                <div
+                                    v-for="(_, index) in productAttribute.product_attribute_values"
+                                    :key="index"
+                                    class="grid gap-4 grid-cols-12"
+                                >
+                                    <div class="col-span-6">
+                                        <FormInput
+                                            :label="label.value"
+                                            :name="`product_attribute_values.${index}.value`"
+                                        />
+                                    </div>
+
+                                    <div class="col-span-3">
+                                        <UButton
+                                            :ui="{ rounded: 'rounded-full' }"
+                                            icon="i-heroicons-trash"
+                                            size="sm"
+                                            color="red"
+                                            variant="solid"
+                                            class="mt-6"
+                                            @click="remove(index)"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </FieldArray>
                     </div>
 
                     <div class="col-span-12">
@@ -117,7 +150,7 @@ const onSubmit = handleSubmit(async values => {
                                 size="sm"
                                 variant="solid"
                                 label="Thêm Mới"
-                                :loading="isPending"
+                                :loading="Boolean(isPending)"
                                 :trailing="false"
                             />
 
