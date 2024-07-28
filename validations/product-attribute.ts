@@ -30,10 +30,17 @@ export const productAttributeForm = v.object({
         v.array(v.string(), `${label.product_category_id} không được bỏ trống.`),
         v.minLength(1, `${label.product_category_id} không được bỏ trống.`),
     ),
-    product_attribute_values: v.array(
-        v.object({
-            value: v.string(`${label.value} không được bỏ trống.`)
-        })
+    product_attribute_values: v.pipe(
+        v.array(
+            v.object({
+                value: v.pipe(
+                    v.string(`${label.value} không được bỏ trống.`),
+                    v.nonEmpty(`${label.value} không được bỏ trống.`)
+                )
+            }),
+            `${label.value} phải có ít nhất 1 giá trị.`
+        ),
+        v.minLength(1, `${label.value} phải có ít nhất 1 giá trị.`)
     ),
     status: v.optional(v.number()),
     description: v.optional(v.string()),

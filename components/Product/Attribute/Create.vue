@@ -7,7 +7,7 @@ import { label, productAttributeFormSchema, type IProductAttributeForm } from '~
 const categoryList = useProductCategoryDataList()
 const { isPending, mutateAsync } = useProductAttributeFormInput()
 
-const { handleSubmit, values: productAttribute, setFieldValue } = useForm<IProductAttributeForm>({
+const { handleSubmit, values: productAttribute, setFieldValue, errors } = useForm<IProductAttributeForm>({
     validationSchema: productAttributeFormSchema
 })
 
@@ -123,7 +123,7 @@ const onSubmit = handleSubmit(async values => {
                                     <div class="col-span-6">
                                         <FormInput
                                             :label="label.value"
-                                            :name="`product_attribute_values.${index}.value`"
+                                            :name="`product_attribute_values[${index}].value`"
                                         />
                                     </div>
 
@@ -141,6 +141,13 @@ const onSubmit = handleSubmit(async values => {
                                 </div>
                             </div>
                         </FieldArray>
+
+                        <p
+                            v-if="errors['product_attribute_values']"
+                            class="text-red-500 dark:text-red-400 text-sm"
+                        >
+                            {{ errors['product_attribute_values'] }}
+                        </p>
                     </div>
 
                     <div class="col-span-12">

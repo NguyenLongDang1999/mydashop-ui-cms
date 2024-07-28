@@ -56,6 +56,14 @@ export enum ROUTER {
     SYSTEM_SETTINGS_HOME_PRODUCT_BRAND = '/system-settings/home/product-brand'
 }
 
+export enum HOME_SETTING {
+    SLIDER = 'home_slider',
+    PRODUCT_FLASH_DEALS = 'home_product_flash_deals',
+    PRODUCT_CATEGORIES_POPULAR = 'home_product_categories_popular',
+    PRODUCT_COLLECTION = 'home_product_collection',
+    PRODUCT_BRAND = 'home_product_brand'
+}
+
 export enum HTTP_CODE {
     CONFLICT = 409,
     UNAUTHORIZED = 401
@@ -85,6 +93,13 @@ export enum STATUS {
 export enum PAGE {
     CURRENT = 1,
     SIZE = 10
+}
+
+export enum INPUT_TYPE {
+    TEXT = 10,
+    TEXTAREA = 20,
+    SELECT = 30,
+    UPLOAD = 40
 }
 
 export enum PATH {

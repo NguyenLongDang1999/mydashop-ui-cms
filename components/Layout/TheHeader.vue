@@ -44,6 +44,7 @@ const items: DropdownItem[][] = [
             click: async () => {
                 await refetch()
 
+                removeToken()
                 navigateTo(ROUTER.LOGIN)
                 useNotification('Đăng xuất thành công!')
             }
@@ -71,7 +72,7 @@ const items: DropdownItem[][] = [
                         :popper="{ placement: 'bottom-start' }"
                     >
                         <div class="flex items-center gap-2">
-                            <span>{{ data.name }}</span>
+                            <span>{{ data?.name }}</span>
                             <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" />
                         </div>
 

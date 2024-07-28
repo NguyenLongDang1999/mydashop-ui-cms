@@ -1,8 +1,11 @@
 <script setup lang="ts">
 
-// updateAppConfig({
-//     ui: { primary: data.value?.theme_colour }
-// })
+// ** useHooks
+const { data } = await useMetadata()
+
+updateAppConfig({
+    ui: { primary: data.value?.theme_colour }
+})
 </script>
 
 <template>

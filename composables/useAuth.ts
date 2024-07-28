@@ -18,14 +18,15 @@ const pathKey = {
     profile: `${path.value}/profile`
 }
 
-export const useAuthLogin = () => useMutation<IAuthLoginForm, Error, IAuthLoginForm>({
+export const useAuthLogin = () => useMutation<{ accessToken: string }, Error, IAuthLoginForm>({
     mutationFn: body => useFetcher(pathKey.signIn, {
         method: 'POST',
         body
     }),
-    onSuccess: () => {
+    onSuccess: (data) => {
         const route = useRoute()
 
+        setToken(data.accessToken)
         navigateTo(route.query.to ? String(route.query.to) : '/')
         useNotification('Đăng nhập thành công!')
     },
