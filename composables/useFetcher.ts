@@ -30,7 +30,7 @@ export const useFetcher = async <T>(
             headers: useRequestHeaders(),
             keepalive: true,
             onRequest({ options }) {
-                const access_token = getToken()
+                const access_token = useCookie(AUTH.ACCESS_TOKEN).value
 
                 if (access_token) {
                     options.headers = {
@@ -41,32 +41,31 @@ export const useFetcher = async <T>(
             },
             async onResponseError({ response }) {
                 if (!response.ok) {
-                    // if (areValuesEqual(response.status, HTTP_CODE.UNAUTHORIZED)) {
-                    try {
-                        if (!refreshTokenLock.value) {
-                            refreshTokenLock.value = true
+                    if (areValuesEqual(response.status, HTTP_CODE.UNAUTHORIZED)) {
+                        try {
+                            if (!refreshTokenLock.value) {
+                                refreshTokenLock.value = true
 
-                            refreshTokenPromise = new Promise<void>(async (resolve, reject) => {
-                                useFetcher('/auth/refresh', {
-                                    onResponse(data) {
-                                        resolve()
-                                        localStorage.setItem(AUTH.ACCESS_TOKEN, data.response._data.accessToken)
-                                        refreshTokenLock.value = false
-                                    },
-                                    onResponseError() {
-                                        removeCookie()
-                                        reject()
-                                        refreshTokenLock.value = false
-                                    }
+                                refreshTokenPromise = new Promise<void>(async (resolve, reject) => {
+                                    useFetcher('/auth/refresh', {
+                                        onResponse() {
+                                            resolve()
+                                            refreshTokenLock.value = false
+                                        },
+                                        onResponseError() {
+                                            removeCookie()
+                                            reject()
+                                            refreshTokenLock.value = false
+                                        }
+                                    })
                                 })
-                            })
-                        }
+                            }
 
-                        await refreshTokenPromise
-                    } catch {
-                        removeCookie()
+                            await refreshTokenPromise
+                        } catch {
+                            removeCookie()
+                        }
                     }
-                    // }
 
                     if (areValuesEqual(response.status, HTTP_CODE.CONFLICT)) {
                         useNotificationMessage(response.status)
@@ -89,6 +88,5 @@ const removeCookie = () => {
 
     refreshTokenAdmin.value = null
 
-    removeToken()
     navigateTo(ROUTER.LOGIN)
 }

@@ -44,7 +44,6 @@ const items: DropdownItem[][] = [
             click: async () => {
                 await refetch()
 
-                removeToken()
                 navigateTo(ROUTER.LOGIN)
                 useNotification('Đăng xuất thành công!')
             }

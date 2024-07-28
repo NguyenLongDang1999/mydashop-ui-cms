@@ -23,10 +23,9 @@ export const useAuthLogin = () => useMutation<{ accessToken: string }, Error, IA
         method: 'POST',
         body
     }),
-    onSuccess: (data) => {
+    onSuccess: () => {
         const route = useRoute()
 
-        setToken(data.accessToken)
         navigateTo(route.query.to ? String(route.query.to) : '/')
         useNotification('Đăng nhập thành công!')
     },

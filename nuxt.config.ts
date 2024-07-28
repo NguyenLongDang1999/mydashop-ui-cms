@@ -7,7 +7,8 @@ export default defineNuxtConfig({
         '@nuxtjs/google-fonts',
         '@vee-validate/nuxt',
         '@vueuse/nuxt',
-        'nuxt-lodash'
+        'nuxt-lodash',
+        "@nuxt/image"
     ],
     ssr: false,
     googleFonts: {

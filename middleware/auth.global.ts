@@ -1,6 +1,6 @@
 export default defineNuxtRouteMiddleware(to => {
     const path = ROUTER.LOGIN
-    const isLoggedIn = !!getToken()
+    const isLoggedIn = !!(useCookie(AUTH.ACCESS_TOKEN).value || useCookie(AUTH.REFRESH_TOKEN).value)
 
     if (!isLoggedIn && to.path !== path) {
         return navigateTo({
