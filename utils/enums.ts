@@ -109,3 +109,13 @@ export enum PATH {
 export enum IMAGE {
     DEFAULT = '/default.jpg'
 }
+
+export enum PRODUCT_TYPE {
+    SINGLE = 10,
+    VARIANT = 20,
+}
+
+export enum PRODUCT_TYPE_TEXT {
+    SINGLE = 'single',
+    VARIANT = 'variant',
+}
