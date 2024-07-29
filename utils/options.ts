@@ -27,3 +27,25 @@ export const optionInputType = [
         name: 'Tải hình'
     }
 ]
+
+export const optionTypeDiscount = [
+    {
+        id: SPECIAL_PRICE.PRICE,
+        name: 'Giá tiền'
+    },
+    {
+        id: SPECIAL_PRICE.PERCENT,
+        name: 'Phần trăm'
+    }
+]
+
+export const optionManageInventory = [
+    {
+        id: MANAGE_INVENTORY.YES,
+        name: 'Có'
+    },
+    {
+        id: MANAGE_INVENTORY.NO,
+        name: 'Không'
+    }
+]

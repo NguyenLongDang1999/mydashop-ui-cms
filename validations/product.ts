@@ -77,6 +77,7 @@ export const productSingleForm = v.object({
     quantity: v.number(`${label.quantity} không được bỏ trống.`),
     special_price_type: v.number(`${label.special_price_type} không được bỏ trống.`),
     special_price: v.number(`${label.special_price} không được bỏ trống.`),
+    manage_inventory: v.optional(v.number()),
     product_type: v.optional(v.number()),
     product_brand_id: v.optional(v.string()),
     status: v.optional(v.number()),

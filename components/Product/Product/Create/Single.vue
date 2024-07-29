@@ -37,7 +37,7 @@ const onSubmit = handleSubmit(async values => {
             </template>
 
             <div class="grid gap-4 grid-cols-12">
-                <!-- <ProductProductInitGeneral /> -->
+                <ProductProductInitGeneral />
                 <ProductProductInitSpecifications />
                 <ProductProductInitDescription />
                 <ProductProductInitMetaSEO />

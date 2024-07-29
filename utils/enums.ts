@@ -119,3 +119,19 @@ export enum PRODUCT_TYPE_TEXT {
     SINGLE = 'single',
     VARIANT = 'variant',
 }
+
+export enum MANAGE_INVENTORY {
+    YES = 10,
+    NO = 20
+}
+
+export enum SPECIAL_PRICE {
+    PRICE = 10,
+    PERCENT = 20
+}
+
+export enum RELATIONS_TYPE {
+    UPSELL = 10,
+    CROSS_SELL = 20,
+    RELATED = 30
+}
