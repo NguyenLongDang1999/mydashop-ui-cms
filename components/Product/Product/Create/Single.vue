@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 // ** Validations Imports
-import { type IProductSingleForm, productSingleFormSchema } from '~/validations/product';
+import { type IProductSingleForm, productSingleFormSchema } from '~/validations/product'
 
 // ** useHooks
 const { isPending, mutateAsync } = useProductFormInput()

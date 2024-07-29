@@ -31,7 +31,7 @@ export const productCategoryForm = v.object({
     status: v.optional(v.number()),
     description: v.optional(v.string()),
     meta_title: v.optional(v.string()),
-    meta_description: v.optional(v.string()),
+    meta_description: v.optional(v.string())
 })
 
 export const productCategorySearch = v.object({
@@ -39,7 +39,7 @@ export const productCategorySearch = v.object({
     name: v.optional(v.string()),
     parent_id: v.optional(v.string()),
     product_brand_id: v.optional(v.string()),
-    status: v.optional(v.number()),
+    status: v.optional(v.number())
 })
 
 export const productCategoryList = v.object({
@@ -54,7 +54,7 @@ export const productCategory = v.object({
     slug: v.string(),
     parentCategory: productCategoryList,
     status: v.number(),
-    created_at: v.string(),
+    created_at: v.string()
 })
 
 export const productCategoryTable = v.object({

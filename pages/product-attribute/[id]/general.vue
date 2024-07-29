@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 // ** Validations Imports
-import { label, productAttributeFormSchema, type IProductAttributeForm } from '~/validations/product-attribute';
+import { label, productAttributeFormSchema, type IProductAttributeForm } from '~/validations/product-attribute'
 
 // ** useHooks
 const categoryList = useProductCategoryDataList()

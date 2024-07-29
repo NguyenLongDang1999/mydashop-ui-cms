@@ -1,10 +1,10 @@
 <script setup lang="ts">
 
 // ** Validations Imports
-import type { IProductSingleForm } from '~/validations/product';
+import type { IProductSingleForm } from '~/validations/product'
 
 // ** Validations Imports
-import { label } from '~/validations/product';
+import { label } from '~/validations/product'
 
 // ** Data
 const product = inject('product') as IProductSingleForm

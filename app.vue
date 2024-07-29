@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 // ** Third Party Imports
-import { VueQueryDevtools } from '@tanstack/vue-query-devtools';
+import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
 
 // ** useHooks
 useHead({

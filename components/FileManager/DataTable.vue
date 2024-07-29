@@ -43,7 +43,9 @@ watch(() => props.closeButton, () => pathURL.value = '')
 
 // ** Methods
 const generateDynamicPath = (objectName: string) => {
-    const pathArray = (pathURL.value as string).split(',').filter(segment => segment.trim() !== '')
+    const pathArray = (pathURL.value as string)
+        .split(',')
+        .filter(segment => segment.trim() !== '')
 
     pathArray.push(objectName)
 
@@ -74,9 +76,7 @@ const generateDynamicPath = (objectName: string) => {
                 <div class="bg-slate-100 px-3 py-2 rounded-md">
                     <UBreadcrumb
                         :links="links"
-                        :ui="{
-                            li: 'cursor-pointer'
-                        }"
+                        :ui="{ li: 'cursor-pointer' }"
                     >
                         <template #default="{ link }">
                             <span @click="pathURL = pathSplit.slice(0, link.index + 1).join(',')">{{ link.label }}</span>

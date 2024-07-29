@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 // ** Validations Imports
-import { label, productBrandSearchSchema, type IProductBrandSearch } from '~/validations/product-brand';
+import { label, productBrandSearchSchema, type IProductBrandSearch } from '~/validations/product-brand'
 
 // ** Props & Emits
 interface Props {

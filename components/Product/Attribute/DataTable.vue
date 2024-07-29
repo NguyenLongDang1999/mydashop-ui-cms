@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
 // ** Validations Imports
-import type { IRow } from '~/validations/core';
-import type { IProductAttribute } from '~/validations/product-attribute';
+import type { IRow } from '~/validations/core'
+import type { IProductAttribute } from '~/validations/product-attribute'
 
 // ** useHooks
 const { productCategoryId, dataTable, dataAggregations, isFetching } = useProductAttributeDataTable()

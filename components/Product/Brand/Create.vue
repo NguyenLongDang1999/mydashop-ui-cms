@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 // ** Validations Imports
-import { label, productBrandFormSchema, type IProductBrandForm } from '~/validations/product-brand';
+import { label, productBrandFormSchema, type IProductBrandForm } from '~/validations/product-brand'
 
 // ** useHooks
 const categoryList = useProductCategoryDataList()

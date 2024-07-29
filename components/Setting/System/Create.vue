@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 // ** Validations Imports
-import { label, settingSystemFormSchema, type ISettingSystemForm } from '~/validations/setting-system';
+import { label, settingSystemFormSchema, type ISettingSystemForm } from '~/validations/setting-system'
 
 // ** useHooks
 const { isPending, mutateAsync } = useSettingSystemFormInput()

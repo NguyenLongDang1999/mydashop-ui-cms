@@ -1,5 +1,5 @@
 // ** VeeValidate Imports
-import * as v from 'valibot';
+import * as v from 'valibot'
 
 // ** Schema
 export const paginationSchema = v.object({

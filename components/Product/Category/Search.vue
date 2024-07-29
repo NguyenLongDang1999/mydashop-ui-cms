@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 // ** Validations Imports
-import { label, productCategorySearchSchema, type IProductCategorySearch } from '~/validations/product-category';
+import { label, productCategorySearchSchema, type IProductCategorySearch } from '~/validations/product-category'
 
 // ** Props & Emits
 interface Props {

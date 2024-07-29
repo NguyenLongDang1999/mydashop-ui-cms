@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 // ** Validations Imports
-import { settingSystemProductCategoryFormSchema, type ISettingSystemForm, type ISettingSystemProductCategoryForm } from '~/validations/setting-system';
+import { settingSystemProductCategoryFormSchema, type ISettingSystemForm, type ISettingSystemProductCategoryForm } from '~/validations/setting-system'
 
 // ** Props & Emits
 interface Props {

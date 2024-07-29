@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
 // ** Validations Imports
-import type { IAuthLoginForm } from '~/validations/auth';
-import { authLoginSchema, label } from '~/validations/auth';
+import type { IAuthLoginForm } from '~/validations/auth'
+import { authLoginSchema, label } from '~/validations/auth'
 
 // ** Layout
 definePageMeta({

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 // ** Types Imports
-import type { DropdownItem } from '#ui/types';
+import type { DropdownItem } from '#ui/types'
 
 // ** useHooks
 const { data } = await useAuthProfile()

@@ -57,7 +57,7 @@ export const settingSystemProductCollectionForm = v.object({
     product_collection: v.array(
         v.object({
             product_collection_id: v.string(),
-            product_id: v.array(v.string()),
+            product_id: v.array(v.string())
         })
     )
 })
