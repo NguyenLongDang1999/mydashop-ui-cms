@@ -16,7 +16,7 @@ const productType = computed(() => route.query?.product_type as string)
 
         <div class="mt-8 pb-24 max-w-none">
             <ProductProductCreateSingle v-if="areValuesEqual(productType, PRODUCT_TYPE_TEXT.SINGLE)" />
-            <!-- <ProductProductCreateVariants v-if="areValuesEqual(productType, PRODUCT_TYPE_TEXT.VARIANT)" /> -->
+            <ProductProductCreateVariants v-if="areValuesEqual(productType, PRODUCT_TYPE_TEXT.VARIANT)" />
         </div>
     </section>
 </template>

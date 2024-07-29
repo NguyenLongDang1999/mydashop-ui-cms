@@ -1,9 +1,6 @@
 // ** VeeValidate Imports
 import * as v from 'valibot'
 
-// ** Schema Core Imports
-// import { aggregationsSchema, countSchema, paginationSchema } from './core'
-
 // ** Label
 export const productLabel = {
     sku: 'Mã sản phẩm',
@@ -86,7 +83,105 @@ export const productSingleForm = v.object({
     meta_description: v.optional(v.string())
 })
 
+export const productVariantForm = v.object({
+    id: v.optional(v.string()),
+    name: v.pipe(
+        v.string(`${productLabel.name} không được bỏ trống.`),
+        v.nonEmpty(`${productLabel.name} không được bỏ trống.`)
+    ),
+    slug: v.pipe(
+        v.string(`${productLabel.slug} không được bỏ trống.`),
+        v.nonEmpty(`${productLabel.slug} không được bỏ trống.`)
+    ),
+    product_category_id: v.pipe(
+        v.string(`${productLabel.product_category_id} không được bỏ trống.`),
+        v.nonEmpty(`${productLabel.product_category_id} không được bỏ trống.`)
+    ),
+    description: v.pipe(
+        v.string(`${productLabel.description} không được bỏ trống.`),
+        v.nonEmpty(`${productLabel.description} không được bỏ trống.`)
+    ),
+    short_description: v.optional(v.string()),
+    technical_specifications: v.array(
+        v.object({
+            title: v.pipe(
+                v.string(`${productLabel.technical_specifications.title} không được bỏ trống.`),
+                v.nonEmpty(`${productLabel.technical_specifications.title} không được bỏ trống.`)
+            ),
+            content: v.pipe(
+                v.string(`${productLabel.technical_specifications.content} không được bỏ trống.`),
+                v.nonEmpty(`${productLabel.technical_specifications.content} không được bỏ trống.`)
+            )
+        })
+    ),
+    product_type: v.optional(v.number()),
+    product_brand_id: v.optional(v.string()),
+    product_attribute_id: v.pipe(
+        v.array(v.string(), `${productLabel.attribute.name} không được bỏ trống.`),
+        v.minLength(1, `${productLabel.attribute.name} không được bỏ trống.`)
+    ),
+    product_attributes: v.pipe(
+        v.array(
+            v.object({
+                name: v.pipe(
+                    v.string(`${productLabel.attribute.name} không được bỏ trống.`),
+                    v.nonEmpty(`${productLabel.attribute.name} không được bỏ trống.`)
+                ),
+                values: v.pipe(
+                    v.array(v.string(), `${productLabel.attribute.values} không được bỏ trống.`),
+                    v.minLength(1, `${productLabel.attribute.values} không được bỏ trống.`)
+                )
+            }),
+            `${productLabel.attribute.name} phải có ít nhất 1 giá trị.`
+        ),
+        v.minLength(1, `${productLabel.attribute.name} phải có ít nhất 1 giá trị.`)
+    ),
+    status: v.optional(v.number()),
+    image_uri: v.optional(v.string()),
+    meta_title: v.optional(v.string()),
+    meta_description: v.optional(v.string())
+})
+
+export const productSearch = v.object({
+    ...paginationSchema.entries,
+    sku: v.optional(v.string()),
+    name: v.optional(v.string()),
+    product_brand_id: v.optional(v.string()),
+    product_category_id: v.optional(v.string()),
+    status: v.optional(v.number()),
+    product_type: v.optional(v.number()),
+    not_flash_deals: v.optional(v.boolean()),
+    product_id_flash_deals: v.optional(v.string())
+})
+
+export const product = v.object({
+    id: v.string(),
+    sku: v.string(),
+    name: v.string(),
+    slug: v.string(),
+    price: v.number(),
+    quantity: v.number(),
+    image_uri: v.string(),
+    special_price: v.number(),
+    special_price_type: v.number(),
+    hasFlashDeals: v.boolean(),
+    status: v.number(),
+    created_at: v.string(),
+    productBrand: productBrandList,
+    productCategory: productCategoryList
+})
+
 export const productSingleFormSchema = toTypedSchema(productSingleForm)
+
+export const productVariantFormSchema = toTypedSchema(productVariantForm)
+
+export const productSearchSchema = toTypedSchema(productSearch)
 
 // ** Types
 export type IProductSingleForm = v.InferInput<typeof productSingleForm>
+
+export type IProductVariantForm = v.InferInput<typeof productVariantForm>
+
+export type IProductSearch = v.InferInput<typeof productSearch>
+
+export type IProduct = v.InferInput<typeof product>

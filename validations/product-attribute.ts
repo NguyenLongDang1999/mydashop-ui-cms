@@ -1,10 +1,6 @@
 // ** VeeValidate Imports
 import * as v from 'valibot'
 
-// ** Schema Core Imports
-import { aggregationsSchema, countSchema, paginationSchema } from './core'
-import { productCategoryList } from './product-category'
-
 // ** Label
 export const productAttributeLabel = {
     name: 'Tên thuộc tính',

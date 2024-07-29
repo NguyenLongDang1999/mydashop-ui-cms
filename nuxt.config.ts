@@ -33,5 +33,8 @@ export default defineNuxtConfig({
     },
     imports: {
         dirs: ['validations']
+    },
+    tailwindcss: {
+        configPath: 'tailwind.config.ts'
     }
 })

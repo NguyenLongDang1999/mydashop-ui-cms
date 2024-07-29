@@ -1,10 +1,6 @@
 // ** VeeValidate Imports
 import * as v from 'valibot'
 
-// ** Schema Core Imports
-import { aggregationsSchema, paginationSchema } from './core'
-import { productCategoryList } from './product-category'
-
 // ** Label
 export const productBrandLabel = {
     name: 'Tên thương hiệu',

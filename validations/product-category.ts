@@ -1,9 +1,6 @@
 // ** VeeValidate Imports
 import * as v from 'valibot'
 
-// ** Schema Core Imports
-import { aggregationsSchema, countSchema, paginationSchema } from './core'
-
 // ** Label
 export const productCategoryLabel = {
     name: 'Tên danh mục',

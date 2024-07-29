@@ -49,3 +49,14 @@ export const optionManageInventory = [
         name: 'Không'
     }
 ]
+
+export const optionProductType = [
+    {
+        id: PRODUCT_TYPE.SINGLE,
+        name: 'Sản phẩm đơn thể'
+    },
+    {
+        id: PRODUCT_TYPE.VARIANT,
+        name: 'Sản phẩm biến thể'
+    }
+]
