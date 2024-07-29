@@ -1,11 +1,5 @@
 <script setup lang="ts">
 
-// ** Validations Imports
-import type { IProductSingleForm } from '~/validations/product'
-
-// ** Validations Imports
-import { label } from '~/validations/product'
-
 // ** Data
 const product = inject('product') as IProductSingleForm
 
@@ -46,14 +40,14 @@ const hasTechnicalSpecifications = computed(() => product.technical_specificatio
                 >
                     <div class="col-span-4">
                         <FormInput
-                            :label="label.technical_specifications.title"
+                            :label="productLabel.technical_specifications.title"
                             :name="`technical_specifications[${index}].title`"
                         />
                     </div>
 
                     <div class="col-span-4">
                         <FormInput
-                            :label="label.technical_specifications.content"
+                            :label="productLabel.technical_specifications.content"
                             :name="`technical_specifications[${index}].content`"
                         />
                     </div>

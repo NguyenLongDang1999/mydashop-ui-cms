@@ -1,9 +1,6 @@
 // ** Third Party Imports
 import { useMutation, useQuery } from '@tanstack/vue-query'
 
-// ** Validations Imports
-import type { IAuthLoginForm, IAuthProfile } from '~/validations/auth'
-
 // ** State
 const path = ref<string>(ROUTE.AUTHENTICATION)
 

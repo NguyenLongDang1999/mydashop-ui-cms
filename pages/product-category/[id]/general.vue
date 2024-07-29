@@ -1,8 +1,5 @@
 <script setup lang="ts">
 
-// ** Validations Imports
-import { label, productCategoryFormSchema, type IProductCategoryForm } from '~/validations/product-category'
-
 // ** useHooks
 const categoryList = useProductCategoryDataList()
 const { isPending, mutateAsync } = useProductCategoryFormInput()
@@ -38,7 +35,7 @@ const onSubmit = handleSubmit(values => mutateAsync(values))
 
                     <div class="sm:col-span-6 col-span-12">
                         <FormInput
-                            :label="label.name"
+                            :label="productCategoryLabel.name"
                             name="name"
                             @update:model-value="val => setFieldValue('slug', slugify(val))"
                         />
@@ -46,14 +43,14 @@ const onSubmit = handleSubmit(values => mutateAsync(values))
 
                     <div class="sm:col-span-6 col-span-12">
                         <FormInput
-                            :label="label.slug"
+                            :label="productCategoryLabel.slug"
                             name="slug"
                         />
                     </div>
 
                     <div class="sm:col-span-6 col-span-12">
                         <FormSelect
-                            :label="label.parent_id"
+                            :label="productCategoryLabel.parent_id"
                             :options="categoryList"
                             name="parent_id"
                         />
@@ -61,7 +58,7 @@ const onSubmit = handleSubmit(values => mutateAsync(values))
 
                     <div class="sm:col-span-6 col-span-12">
                         <FormSelect
-                            :label="label.status"
+                            :label="productCategoryLabel.status"
                             :options="optionStatus"
                             name="status"
                         />
@@ -69,21 +66,21 @@ const onSubmit = handleSubmit(values => mutateAsync(values))
 
                     <div class="col-span-12">
                         <FormTextarea
-                            :label="label.description"
+                            :label="productCategoryLabel.description"
                             name="description"
                         />
                     </div>
 
                     <div class="col-span-12">
                         <FormTextarea
-                            :label="label.meta_title"
+                            :label="productCategoryLabel.meta_title"
                             name="meta_title"
                         />
                     </div>
 
                     <div class="col-span-12">
                         <FormTextarea
-                            :label="label.meta_description"
+                            :label="productCategoryLabel.meta_description"
                             name="meta_description"
                         />
                     </div>

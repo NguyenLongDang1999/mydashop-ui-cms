@@ -4,10 +4,6 @@ import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tansta
 // ** Types Imports
 import type { VerticalNavigationLink } from '#ui/types'
 
-// ** Validations Imports
-import type { Columns, IDeleteRecord } from '~/validations/core'
-import type { IProductCategoryForm, IProductCategoryList, IProductCategorySearch, IProductCategoryTable } from '~/validations/product-category'
-
 // ** State
 const path = ref<string>(ROUTE.PRODUCT_CATEGORY)
 

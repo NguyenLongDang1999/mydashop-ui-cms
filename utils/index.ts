@@ -1,6 +1,3 @@
-// ** Validations Imports
-import type { IOptions } from '~/validations/core'
-
 export const valueTransform = (options: IOptions[], value: string | number) => options.find(val => areValuesEqual(val.id, value))
 
 export const goToPage = (pageName?: number | string, currentPath?: string, prefixPath?: string): string => {

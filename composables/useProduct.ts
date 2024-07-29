@@ -6,9 +6,6 @@ import type { VerticalNavigationLink } from '#ui/types'
 import type { IProductFormVariant, IProductSearch, IProductTable } from '~/types/product.type'
 
 // ** Validations Imports
-import type { Columns, IDeleteRecord } from '~/validations/core'
-import type { IProductAttributeList } from '~/validations/product-attribute'
-import type { IProductBrandList } from '~/validations/product-brand'
 import type { IProductGenerateVariants } from '~/validations/product-flash-deals'
 
 // ** State

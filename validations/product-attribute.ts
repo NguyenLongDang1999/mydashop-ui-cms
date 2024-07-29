@@ -6,7 +6,7 @@ import { aggregationsSchema, countSchema, paginationSchema } from './core'
 import { productCategoryList } from './product-category'
 
 // ** Label
-export const label = {
+export const productAttributeLabel = {
     name: 'Tên thuộc tính',
     slug: 'Đường dẫn URL',
     product_category_id: 'Danh mục',
@@ -19,28 +19,28 @@ export const label = {
 export const productAttributeForm = v.object({
     id: v.optional(v.string()),
     name: v.pipe(
-        v.string(`${label.name} không được bỏ trống.`),
-        v.nonEmpty(`${label.name} không được bỏ trống.`)
+        v.string(`${productAttributeLabel.name} không được bỏ trống.`),
+        v.nonEmpty(`${productAttributeLabel.name} không được bỏ trống.`)
     ),
     slug: v.pipe(
-        v.string(`${label.slug} không được bỏ trống.`),
-        v.nonEmpty(`${label.slug} không được bỏ trống.`)
+        v.string(`${productAttributeLabel.slug} không được bỏ trống.`),
+        v.nonEmpty(`${productAttributeLabel.slug} không được bỏ trống.`)
     ),
     product_category_id: v.pipe(
-        v.array(v.string(), `${label.product_category_id} không được bỏ trống.`),
-        v.minLength(1, `${label.product_category_id} không được bỏ trống.`)
+        v.array(v.string(), `${productAttributeLabel.product_category_id} không được bỏ trống.`),
+        v.minLength(1, `${productAttributeLabel.product_category_id} không được bỏ trống.`)
     ),
     product_attribute_values: v.pipe(
         v.array(
             v.object({
                 value: v.pipe(
-                    v.string(`${label.value} không được bỏ trống.`),
-                    v.nonEmpty(`${label.value} không được bỏ trống.`)
+                    v.string(`${productAttributeLabel.value} không được bỏ trống.`),
+                    v.nonEmpty(`${productAttributeLabel.value} không được bỏ trống.`)
                 )
             }),
-            `${label.value} phải có ít nhất 1 giá trị.`
+            `${productAttributeLabel.value} phải có ít nhất 1 giá trị.`
         ),
-        v.minLength(1, `${label.value} phải có ít nhất 1 giá trị.`)
+        v.minLength(1, `${productAttributeLabel.value} phải có ít nhất 1 giá trị.`)
     ),
     status: v.optional(v.number()),
     description: v.optional(v.string())

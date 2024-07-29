@@ -1,9 +1,5 @@
 <script setup lang="ts">
 
-// ** Validations Imports
-import type { IRow } from '~/validations/core'
-import type { IProductBrand } from '~/validations/product-brand'
-
 // ** useHooks
 const { productCategoryId, dataTable, dataAggregations, isFetching } = useProductBrandDataTable()
 const { isPending, mutateAsync } = useProductBrandFormDelete()

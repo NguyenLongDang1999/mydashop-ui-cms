@@ -11,7 +11,7 @@
         "lint": "eslint . -c .eslintrc.cjs --fix --ext .ts,.js,.vue,.tsx,.jsx"
     },
     "dependencies": {
-        "@nuxt/image": "latest",
+        "@nuxt/image": "^1.7.0",
         "@nuxt/ui": "^2.18.2",
         "@nuxtjs/google-fonts": "^3.2.0",
         "@tanstack/vue-query": "^5.51.14",

@@ -1,9 +1,5 @@
 <script setup lang="ts">
 
-// ** Validations Imports
-import type { IProductBrandForm } from '~/validations/product-brand'
-import { label, productBrandFormSchema } from '~/validations/product-brand'
-
 // ** useHooks
 const categoryList = useProductCategoryDataList()
 const { isPending, mutateAsync } = useProductBrandFormInput()
@@ -39,7 +35,7 @@ const onSubmit = handleSubmit(values => mutateAsync(values))
 
                     <div class="sm:col-span-6 col-span-12">
                         <FormInput
-                            :label="label.name"
+                            :label="productBrandLabel.name"
                             name="name"
                             @update:model-value="val => setFieldValue('slug', slugify(val))"
                         />
@@ -47,14 +43,14 @@ const onSubmit = handleSubmit(values => mutateAsync(values))
 
                     <div class="sm:col-span-6 col-span-12">
                         <FormInput
-                            :label="label.slug"
+                            :label="productBrandLabel.slug"
                             name="slug"
                         />
                     </div>
 
                     <div class="sm:col-span-6 col-span-12">
                         <FormSelect
-                            :label="label.product_category_id"
+                            :label="productBrandLabel.product_category_id"
                             :options="categoryList"
                             :route-page="ROUTER.PRODUCT_CATEGORY"
                             name="product_category_id"
@@ -64,7 +60,7 @@ const onSubmit = handleSubmit(values => mutateAsync(values))
 
                     <div class="sm:col-span-6 col-span-12">
                         <FormSelect
-                            :label="label.status"
+                            :label="productBrandLabel.status"
                             :options="optionStatus"
                             name="status"
                         />
@@ -72,7 +68,7 @@ const onSubmit = handleSubmit(values => mutateAsync(values))
 
                     <div class="col-span-12">
                         <FormTextarea
-                            :label="label.description"
+                            :label="productBrandLabel.description"
                             name="description"
                         />
                     </div>

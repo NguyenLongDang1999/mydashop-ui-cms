@@ -4,10 +4,6 @@ import { keepPreviousData, useMutation, useQueries, useQuery, useQueryClient } f
 // ** Types Imports
 import type { VerticalNavigationLink } from '#ui/types'
 
-// ** Validations Imports
-import type { Columns, IDeleteRecord } from '~/validations/core'
-import type { IProductAttributeForm, IProductAttributeList, IProductAttributeSearch, IProductAttributeTable } from '~/validations/product-attribute'
-
 // ** State
 const path = ref<string>(ROUTE.PRODUCT_ATTRIBUTE)
 

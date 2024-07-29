@@ -1,9 +1,3 @@
-<script setup lang="ts">
-
-// ** Validations Imports
-import { label } from '~/validations/product'
-</script>
-
 <template>
     <div class="col-span-12">
         <p class="text-sm/6 font-semibold flex items-center gap-1.5 capitalize">
@@ -13,14 +7,14 @@ import { label } from '~/validations/product'
 
     <div class="col-span-12">
         <FormTextarea
-            :label="label.short_description"
+            :label="productLabel.short_description"
             name="short_description"
         />
     </div>
 
     <div class="col-span-12">
         <FormEditor
-            :label="label.description"
+            :label="productLabel.description"
             name="description"
         />
     </div>

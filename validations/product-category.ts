@@ -5,7 +5,7 @@ import * as v from 'valibot'
 import { aggregationsSchema, countSchema, paginationSchema } from './core'
 
 // ** Label
-export const label = {
+export const productCategoryLabel = {
     name: 'Tên danh mục',
     slug: 'Đường dẫn URL',
     parent_id: 'Danh mục cha',
@@ -19,12 +19,12 @@ export const label = {
 export const productCategoryForm = v.object({
     id: v.optional(v.string()),
     name: v.pipe(
-        v.string(`${label.name} không được bỏ trống.`),
-        v.nonEmpty(`${label.name} không được bỏ trống.`)
+        v.string(`${productCategoryLabel.name} không được bỏ trống.`),
+        v.nonEmpty(`${productCategoryLabel.name} không được bỏ trống.`)
     ),
     slug: v.pipe(
-        v.string(`${label.slug} không được bỏ trống.`),
-        v.nonEmpty(`${label.slug} không được bỏ trống.`)
+        v.string(`${productCategoryLabel.slug} không được bỏ trống.`),
+        v.nonEmpty(`${productCategoryLabel.slug} không được bỏ trống.`)
     ),
     parent_id: v.optional(v.string()),
     image_uri: v.optional(v.string()),

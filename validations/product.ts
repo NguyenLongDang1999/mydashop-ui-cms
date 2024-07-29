@@ -5,7 +5,7 @@ import * as v from 'valibot'
 // import { aggregationsSchema, countSchema, paginationSchema } from './core'
 
 // ** Label
-export const label = {
+export const productLabel = {
     sku: 'Mã sản phẩm',
     name: 'Tên sản phẩm',
     slug: 'Đường dẫn URL',
@@ -41,42 +41,42 @@ export const label = {
 export const productSingleForm = v.object({
     id: v.optional(v.string()),
     sku: v.pipe(
-        v.string(`${label.sku} không được bỏ trống.`),
-        v.nonEmpty(`${label.sku} không được bỏ trống.`)
+        v.string(`${productLabel.sku} không được bỏ trống.`),
+        v.nonEmpty(`${productLabel.sku} không được bỏ trống.`)
     ),
     name: v.pipe(
-        v.string(`${label.name} không được bỏ trống.`),
-        v.nonEmpty(`${label.name} không được bỏ trống.`)
+        v.string(`${productLabel.name} không được bỏ trống.`),
+        v.nonEmpty(`${productLabel.name} không được bỏ trống.`)
     ),
     slug: v.pipe(
-        v.string(`${label.slug} không được bỏ trống.`),
-        v.nonEmpty(`${label.slug} không được bỏ trống.`)
+        v.string(`${productLabel.slug} không được bỏ trống.`),
+        v.nonEmpty(`${productLabel.slug} không được bỏ trống.`)
     ),
     product_category_id: v.pipe(
-        v.string(`${label.product_category_id} không được bỏ trống.`),
-        v.nonEmpty(`${label.product_category_id} không được bỏ trống.`)
+        v.string(`${productLabel.product_category_id} không được bỏ trống.`),
+        v.nonEmpty(`${productLabel.product_category_id} không được bỏ trống.`)
     ),
     description: v.pipe(
-        v.string(`${label.description} không được bỏ trống.`),
-        v.nonEmpty(`${label.description} không được bỏ trống.`)
+        v.string(`${productLabel.description} không được bỏ trống.`),
+        v.nonEmpty(`${productLabel.description} không được bỏ trống.`)
     ),
     short_description: v.optional(v.string()),
     technical_specifications: v.array(
         v.object({
             title: v.pipe(
-                v.string(`${label.technical_specifications.title} không được bỏ trống.`),
-                v.nonEmpty(`${label.technical_specifications.title} không được bỏ trống.`)
+                v.string(`${productLabel.technical_specifications.title} không được bỏ trống.`),
+                v.nonEmpty(`${productLabel.technical_specifications.title} không được bỏ trống.`)
             ),
             content: v.pipe(
-                v.string(`${label.technical_specifications.content} không được bỏ trống.`),
-                v.nonEmpty(`${label.technical_specifications.content} không được bỏ trống.`)
+                v.string(`${productLabel.technical_specifications.content} không được bỏ trống.`),
+                v.nonEmpty(`${productLabel.technical_specifications.content} không được bỏ trống.`)
             )
         })
     ),
-    price: v.number(`${label.price} không được bỏ trống.`),
-    quantity: v.number(`${label.quantity} không được bỏ trống.`),
-    special_price_type: v.number(`${label.special_price_type} không được bỏ trống.`),
-    special_price: v.number(`${label.special_price} không được bỏ trống.`),
+    price: v.number(`${productLabel.price} không được bỏ trống.`),
+    quantity: v.number(`${productLabel.quantity} không được bỏ trống.`),
+    special_price_type: v.number(`${productLabel.special_price_type} không được bỏ trống.`),
+    special_price: v.number(`${productLabel.special_price} không được bỏ trống.`),
     manage_inventory: v.optional(v.number()),
     product_type: v.optional(v.number()),
     product_brand_id: v.optional(v.string()),

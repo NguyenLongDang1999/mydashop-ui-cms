@@ -2,7 +2,7 @@
 import * as v from 'valibot'
 
 // ** Label
-export const label = {
+export const settingSystemLabel = {
     label: 'Tiêu đề',
     key: 'Key',
     value: 'Value',
@@ -18,29 +18,29 @@ export const label = {
 export const settingSystemForm = v.object({
     id: v.optional(v.string()),
     label: v.pipe(
-        v.string(`${label.label} không được bỏ trống.`),
-        v.nonEmpty(`${label.label} không được bỏ trống.`)
+        v.string(`${settingSystemLabel.label} không được bỏ trống.`),
+        v.nonEmpty(`${settingSystemLabel.label} không được bỏ trống.`)
     ),
     key: v.pipe(
-        v.string(`${label.key} không được bỏ trống.`),
-        v.nonEmpty(`${label.key} không được bỏ trống.`)
+        v.string(`${settingSystemLabel.key} không được bỏ trống.`),
+        v.nonEmpty(`${settingSystemLabel.key} không được bỏ trống.`)
     ),
     value: v.pipe(
-        v.string(`${label.value} không được bỏ trống.`),
-        v.nonEmpty(`${label.value} không được bỏ trống.`)
+        v.string(`${settingSystemLabel.value} không được bỏ trống.`),
+        v.nonEmpty(`${settingSystemLabel.value} không được bỏ trống.`)
     ),
     description: v.optional(v.string()),
-    input_type: v.number(`${label.value} không được bỏ trống.`),
+    input_type: v.number(`${settingSystemLabel.value} không được bỏ trống.`),
     setting_system_options: v.optional(
         v.array(
             v.object({
                 id: v.pipe(
-                    v.string(`${label.setting_system_options.id} không được bỏ trống.`),
-                    v.nonEmpty(`${label.setting_system_options.id} không được bỏ trống.`)
+                    v.string(`${settingSystemLabel.setting_system_options.id} không được bỏ trống.`),
+                    v.nonEmpty(`${settingSystemLabel.setting_system_options.id} không được bỏ trống.`)
                 ),
                 name: v.pipe(
-                    v.string(`${label.setting_system_options.name} không được bỏ trống.`),
-                    v.nonEmpty(`${label.setting_system_options.name} không được bỏ trống.`)
+                    v.string(`${settingSystemLabel.setting_system_options.name} không được bỏ trống.`),
+                    v.nonEmpty(`${settingSystemLabel.setting_system_options.name} không được bỏ trống.`)
                 )
             })
         )

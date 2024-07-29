@@ -1,8 +1,5 @@
 <script setup lang="ts">
 
-// ** Validations Imports
-import type { IOptions } from '~/validations/core'
-
 // ** Props & Emits
 interface Props {
     name: string

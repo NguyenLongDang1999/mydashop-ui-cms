@@ -6,7 +6,7 @@ import { aggregationsSchema, paginationSchema } from './core'
 import { productCategoryList } from './product-category'
 
 // ** Label
-export const label = {
+export const productBrandLabel = {
     name: 'Tên thương hiệu',
     slug: 'Đường dẫn URL',
     product_category_id: 'Danh mục',
@@ -18,16 +18,16 @@ export const label = {
 export const productBrandForm = v.object({
     id: v.optional(v.string()),
     name: v.pipe(
-        v.string(`${label.name} không được bỏ trống.`),
-        v.nonEmpty(`${label.name} không được bỏ trống.`)
+        v.string(`${productBrandLabel.name} không được bỏ trống.`),
+        v.nonEmpty(`${productBrandLabel.name} không được bỏ trống.`)
     ),
     slug: v.pipe(
-        v.string(`${label.slug} không được bỏ trống.`),
-        v.nonEmpty(`${label.slug} không được bỏ trống.`)
+        v.string(`${productBrandLabel.slug} không được bỏ trống.`),
+        v.nonEmpty(`${productBrandLabel.slug} không được bỏ trống.`)
     ),
     product_category_id: v.pipe(
-        v.array(v.string(), `${label.product_category_id} không được bỏ trống.`),
-        v.minLength(1, `${label.product_category_id} không được bỏ trống.`)
+        v.array(v.string(), `${productBrandLabel.product_category_id} không được bỏ trống.`),
+        v.minLength(1, `${productBrandLabel.product_category_id} không được bỏ trống.`)
     ),
     image_uri: v.optional(v.string()),
     status: v.optional(v.number()),

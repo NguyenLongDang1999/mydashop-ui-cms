@@ -1,8 +1,5 @@
 <script setup lang="ts">
 
-// ** Validations Imports
-import { label, productBrandFormSchema, type IProductBrandForm } from '~/validations/product-brand'
-
 // ** useHooks
 const categoryList = useProductCategoryDataList()
 const { isPending, mutateAsync } = useProductBrandFormInput()
@@ -54,7 +51,7 @@ const onSubmit = handleSubmit(async values => {
 
                     <div class="sm:col-span-6 col-span-12">
                         <FormInput
-                            :label="label.name"
+                            :label="productBrandLabel.name"
                             name="name"
                             @update:model-value="val => setFieldValue('slug', slugify(val))"
                         />
@@ -62,14 +59,14 @@ const onSubmit = handleSubmit(async values => {
 
                     <div class="sm:col-span-6 col-span-12">
                         <FormInput
-                            :label="label.slug"
+                            :label="productBrandLabel.slug"
                             name="slug"
                         />
                     </div>
 
                     <div class="sm:col-span-6 col-span-12">
                         <FormSelect
-                            :label="label.product_category_id"
+                            :label="productBrandLabel.product_category_id"
                             :options="categoryList"
                             name="product_category_id"
                             multiple
@@ -78,7 +75,7 @@ const onSubmit = handleSubmit(async values => {
 
                     <div class="sm:col-span-6 col-span-12">
                         <FormSelect
-                            :label="label.status"
+                            :label="productBrandLabel.status"
                             :options="optionStatus"
                             name="status"
                         />
@@ -86,7 +83,7 @@ const onSubmit = handleSubmit(async values => {
 
                     <div class="col-span-12">
                         <FormTextarea
-                            :label="label.description"
+                            :label="productBrandLabel.description"
                             name="description"
                         />
                     </div>

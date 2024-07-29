@@ -1,8 +1,5 @@
 <script setup lang="ts">
 
-// ** Validations Imports
-import { label, productCategorySearchSchema, type IProductCategorySearch } from '~/validations/product-category'
-
 // ** Props & Emits
 interface Props {
     productBrandId?: string
@@ -45,7 +42,7 @@ const onSubmit = handleSubmit(() => _assign(search, searchTemp))
             <div class="md:col-span-3 sm:col-span-6 col-span-12">
                 <FormInput
                     v-model="searchTemp.name"
-                    :label="label.name"
+                    :label="productCategoryLabel.name"
                     name="search_name"
                 />
             </div>
@@ -53,7 +50,7 @@ const onSubmit = handleSubmit(() => _assign(search, searchTemp))
             <div class="md:col-span-3 sm:col-span-6 col-span-12">
                 <FormSelect
                     v-model="searchTemp.parent_id"
-                    :label="label.parent_id"
+                    :label="productCategoryLabel.parent_id"
                     :options="categoryList"
                     name="search_parent_id"
                 />
@@ -62,7 +59,7 @@ const onSubmit = handleSubmit(() => _assign(search, searchTemp))
             <div class="md:col-span-3 sm:col-span-6 col-span-12">
                 <FormSelect
                     v-model="searchTemp.status"
-                    :label="label.status"
+                    :label="productCategoryLabel.status"
                     :options="optionStatus"
                     name="search_status"
                 />

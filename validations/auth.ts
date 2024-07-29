@@ -2,7 +2,7 @@
 import * as v from 'valibot'
 
 // ** Label
-export const label = {
+export const authLabel = {
     email: 'Email',
     password: 'Mật khẩu'
 }
@@ -10,15 +10,15 @@ export const label = {
 // ** Schema
 export const authLogin = v.object({
     email: v.pipe(
-        v.string(`${label.email} không được bỏ trống.`),
-        v.email(`${label.email} không đúng định dạng.`),
-        v.nonEmpty(`${label.email} không được bỏ trống.`)
+        v.string(`${authLabel.email} không được bỏ trống.`),
+        v.email(`${authLabel.email} không đúng định dạng.`),
+        v.nonEmpty(`${authLabel.email} không được bỏ trống.`)
     ),
     password: v.pipe(
-        v.string(`${label.password} không được bỏ trống.`),
-        v.nonEmpty(`${label.password} không được bỏ trống.`),
-        v.minLength(6, `${label.password} phải từ 6 - 20 ký tự.`),
-        v.maxLength(20, `${label.password} phải từ 6 - 20 ký tự.`)
+        v.string(`${authLabel.password} không được bỏ trống.`),
+        v.nonEmpty(`${authLabel.password} không được bỏ trống.`),
+        v.minLength(6, `${authLabel.password} phải từ 6 - 20 ký tự.`),
+        v.maxLength(20, `${authLabel.password} phải từ 6 - 20 ký tự.`)
     )
 })
 

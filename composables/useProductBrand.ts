@@ -4,10 +4,6 @@ import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tansta
 // ** Types Imports
 import type { VerticalNavigationLink } from '#ui/types'
 
-// ** Validations Imports
-import type { Columns, IDeleteRecord } from '~/validations/core'
-import type { IProductBrandForm, IProductBrandSearch, IProductBrandTable } from '~/validations/product-brand'
-
 // ** State
 const path = ref<string>(ROUTE.PRODUCT_BRAND)
 

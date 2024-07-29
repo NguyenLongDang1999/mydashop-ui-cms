@@ -1,8 +1,5 @@
 <script setup lang="ts">
 
-// ** Validations Imports
-import { label, settingSystemFormSchema, type ISettingSystemForm } from '~/validations/setting-system'
-
 // ** Props & Emits
 interface Props {
     settingSystem: ISettingSystemForm
@@ -75,28 +72,28 @@ const onSubmit = handleSubmit(async values => {
 
                     <div class="sm:col-span-6 col-span-12">
                         <FormInput
-                            :label="label.label"
+                            :label="settingSystemLabel.label"
                             name="label"
                         />
                     </div>
 
                     <div class="sm:col-span-6 col-span-12">
                         <FormInput
-                            :label="label.key"
+                            :label="settingSystemLabel.key"
                             name="key"
                         />
                     </div>
 
                     <div class="col-span-12">
                         <FormTextarea
-                            :label="label.description"
+                            :label="settingSystemLabel.description"
                             name="description"
                         />
                     </div>
 
                     <div class="sm:col-span-6 col-span-12">
                         <FormSelect
-                            :label="label.input_type"
+                            :label="settingSystemLabel.input_type"
                             :options="optionInputType"
                             name="input_type"
                         />
@@ -132,14 +129,14 @@ const onSubmit = handleSubmit(async values => {
                                     >
                                         <div class="col-span-4">
                                             <FormInput
-                                                :label="label.setting_system_options.id"
+                                                :label="settingSystemLabel.setting_system_options.id"
                                                 :name="`setting_system_options.${index}.id`"
                                             />
                                         </div>
 
                                         <div class="col-span-4">
                                             <FormInput
-                                                :label="label.setting_system_options.name"
+                                                :label="settingSystemLabel.setting_system_options.name"
                                                 :name="`setting_system_options.${index}.name`"
                                             />
                                         </div>
@@ -170,26 +167,26 @@ const onSubmit = handleSubmit(async values => {
                     <div class="col-span-12">
                         <FormSelect
                             v-if="inputTypeIsSelect"
-                            :label="label.value"
+                            :label="settingSystemLabel.value"
                             :options="setting.setting_system_options ?? []"
                             name="value"
                         />
 
                         <FormInput
                             v-if="areValuesEqual(setting.input_type, INPUT_TYPE.TEXT)"
-                            :label="label.value"
+                            :label="settingSystemLabel.value"
                             name="value"
                         />
 
                         <FormTextarea
                             v-if="areValuesEqual(setting.input_type, INPUT_TYPE.TEXTAREA)"
-                            :label="label.value"
+                            :label="settingSystemLabel.value"
                             name="value"
                         />
 
                         <FormUpload
                             v-if="areValuesEqual(setting.input_type, INPUT_TYPE.UPLOAD)"
-                            :label="label.value"
+                            :label="settingSystemLabel.value"
                             name="value"
                         />
                     </div>

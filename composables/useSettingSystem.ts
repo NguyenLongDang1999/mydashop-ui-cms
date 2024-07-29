@@ -4,9 +4,6 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/vue-query'
 // ** Types Imports
 import type { VerticalNavigationLink } from '#ui/types'
 
-// ** Validations Imports
-import type { IMetadata, ISettingSystemForm } from '~/validations/setting-system'
-
 // ** State
 const path = ref<string>(ROUTE.SYSTEM_SETTINGS)
 

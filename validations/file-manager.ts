@@ -2,15 +2,15 @@
 import * as v from 'valibot'
 
 // ** Label
-export const label = {
+export const fileManagerLabel = {
     folder_name: 'Tên Folder'
 }
 
 // ** Schema
 export const fileManager = v.object({
     folder_name: v.pipe(
-        v.string(`${label.folder_name} không được bỏ trống.`),
-        v.nonEmpty(`${label.folder_name} không được bỏ trống.`)
+        v.string(`${fileManagerLabel.folder_name} không được bỏ trống.`),
+        v.nonEmpty(`${fileManagerLabel.folder_name} không được bỏ trống.`)
     )
 })
 

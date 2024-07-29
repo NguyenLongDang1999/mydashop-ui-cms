@@ -1,8 +1,5 @@
 <script setup lang="ts">
 
-// ** Validations Imports
-import { fileManagerSchema, label, type IFileManagerForm } from '~/validations/file-manager'
-
 // ** Data
 const isOpen = ref<boolean>(false)
 
@@ -33,9 +30,7 @@ const onSubmit = handleSubmit(async values => {
 
     <UModal
         v-model="isOpen"
-        :ui="{
-            width: 'sm:max-w-sm'
-        }"
+        :ui="{ width: 'sm:max-w-sm' }"
     >
         <UForm
             :state="fileManagerSchema"
@@ -60,7 +55,7 @@ const onSubmit = handleSubmit(async values => {
                 </template>
 
                 <FormInput
-                    :label="label.folder_name"
+                    :label="fileManagerLabel.folder_name"
                     name="folder_name"
                 />
 

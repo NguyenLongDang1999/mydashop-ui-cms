@@ -30,5 +30,8 @@ export default defineNuxtConfig({
         prefix: '_',
         prefixSkip: ['string'],
         upperAfterPrefix: false
+    },
+    imports: {
+        dirs: ['validations']
     }
 })

@@ -1,9 +1,6 @@
 // ** Third Party Imports
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/vue-query'
 
-// ** Validations Imports
-import type { Columns } from '~/validations/core'
-
 // ** State
 const path = ref<string>(ROUTE.FILE_MANAGER)
 const pathURL = ref<string>('')

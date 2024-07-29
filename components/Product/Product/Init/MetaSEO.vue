@@ -1,8 +1,5 @@
 <script setup lang="ts">
 
-// ** Validations Imports
-import { label } from '~/validations/product'
-
 // ** Props & Emits
 interface Props {
     number?: number
@@ -22,14 +19,14 @@ withDefaults(defineProps<Props>(), {
 
     <div class="col-span-12">
         <FormInput
-            :label="label.meta_title"
+            :label="productLabel.meta_title"
             name="meta_title"
         />
     </div>
 
     <div class="col-span-12">
         <FormInput
-            :label="label.meta_description"
+            :label="productLabel.meta_description"
             name="meta_description"
         />
     </div>

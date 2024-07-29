@@ -1,9 +1,5 @@
 <script setup lang="ts">
 
-// ** Validations Imports
-import type { IAuthLoginForm } from '~/validations/auth'
-import { authLoginSchema, label } from '~/validations/auth'
-
 // ** Layout
 definePageMeta({
     layout: 'auth'
@@ -38,14 +34,14 @@ const onSubmit = handleSubmit(values => mutateAsync(values))
                     <div class="grid gap-4 grid-cols-12">
                         <div class="col-span-12">
                             <FormInput
-                                :label="label.email"
+                                :label="authLabel.email"
                                 name="email"
                             />
                         </div>
 
                         <div class="col-span-12">
                             <FormInput
-                                :label="label.password"
+                                :label="authLabel.password"
                                 name="password"
                                 type="password"
                             />

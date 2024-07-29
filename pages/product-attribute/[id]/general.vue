@@ -1,8 +1,5 @@
 <script setup lang="ts">
 
-// ** Validations Imports
-import { label, productAttributeFormSchema, type IProductAttributeForm } from '~/validations/product-attribute'
-
 // ** useHooks
 const categoryList = useProductCategoryDataList()
 const { isPending, mutateAsync } = useProductAttributeFormInput()
@@ -40,7 +37,7 @@ const onSubmit = handleSubmit(values => mutateAsync(values))
 
                     <div class="sm:col-span-6 col-span-12">
                         <FormInput
-                            :label="label.name"
+                            :label="productAttributeLabel.name"
                             name="name"
                             @update:model-value="val => setFieldValue('slug', slugify(val))"
                         />
@@ -48,14 +45,14 @@ const onSubmit = handleSubmit(values => mutateAsync(values))
 
                     <div class="sm:col-span-6 col-span-12">
                         <FormInput
-                            :label="label.slug"
+                            :label="productAttributeLabel.slug"
                             name="slug"
                         />
                     </div>
 
                     <div class="sm:col-span-6 col-span-12">
                         <FormSelect
-                            :label="label.product_category_id"
+                            :label="productAttributeLabel.product_category_id"
                             :options="categoryList"
                             :route-page="ROUTER.PRODUCT_CATEGORY"
                             name="product_category_id"
@@ -65,7 +62,7 @@ const onSubmit = handleSubmit(values => mutateAsync(values))
 
                     <div class="sm:col-span-6 col-span-12">
                         <FormSelect
-                            :label="label.status"
+                            :label="productAttributeLabel.status"
                             :options="optionStatus"
                             name="status"
                         />
@@ -73,7 +70,7 @@ const onSubmit = handleSubmit(values => mutateAsync(values))
 
                     <div class="col-span-12">
                         <FormTextarea
-                            :label="label.description"
+                            :label="productAttributeLabel.description"
                             name="description"
                         />
                     </div>
@@ -107,7 +104,7 @@ const onSubmit = handleSubmit(values => mutateAsync(values))
                                 >
                                     <div class="col-span-6">
                                         <FormInput
-                                            :label="label.value"
+                                            :label="productAttributeLabel.value"
                                             :name="`product_attribute_values.${index}.value`"
                                         />
                                     </div>
