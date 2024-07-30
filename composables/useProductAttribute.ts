@@ -167,11 +167,8 @@ export const useProductAttributeValueList = () => {
         }))
     })
 
-    // ** Computed
-    const attributeValueList = computed(() => attributeData.value)
-
     return {
         attribute_id,
-        attributeValueList
+        attributeValueList: computed(() => attributeData.value)
     }
 }

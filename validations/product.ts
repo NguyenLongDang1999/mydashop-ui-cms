@@ -83,6 +83,21 @@ export const productSingleForm = v.object({
     meta_description: v.optional(v.string())
 })
 
+export const productVariants = v.object({
+    is_default: v.boolean(),
+    label: v.optional(v.string()),
+    sku: v.pipe(
+        v.string(`${productLabel.sku} không được bỏ trống.`),
+        v.nonEmpty(`${productLabel.sku} không được bỏ trống.`)
+    ),
+    price: v.number(`${productLabel.price} không được bỏ trống.`),
+    quantity: v.number(`${productLabel.quantity} không được bỏ trống.`),
+    special_price_type: v.number(`${productLabel.special_price_type} không được bỏ trống.`),
+    special_price: v.number(`${productLabel.special_price} không được bỏ trống.`),
+    manage_inventory: v.number(),
+    product_attribute_value_id: v.optional(v.array(v.string()))
+})
+
 export const productVariantForm = v.object({
     id: v.optional(v.string()),
     name: v.pipe(
@@ -136,6 +151,10 @@ export const productVariantForm = v.object({
         ),
         v.minLength(1, `${productLabel.attribute.name} phải có ít nhất 1 giá trị.`)
     ),
+    product_variants: v.pipe(
+        v.array(productVariants, `${productLabel.attribute.name} phải có ít nhất 1 giá trị.`),
+        v.minLength(1, `${productLabel.attribute.name} phải có ít nhất 1 giá trị.`)
+    ),
     status: v.optional(v.number()),
     image_uri: v.optional(v.string()),
     meta_title: v.optional(v.string()),
@@ -179,6 +198,8 @@ export const productSearchSchema = toTypedSchema(productSearch)
 
 // ** Types
 export type IProductSingleForm = v.InferInput<typeof productSingleForm>
+
+export type IProductVariants = v.InferInput<typeof productVariants>
 
 export type IProductVariantForm = v.InferInput<typeof productVariantForm>
 

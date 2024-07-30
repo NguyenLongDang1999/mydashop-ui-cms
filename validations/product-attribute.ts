@@ -66,6 +66,21 @@ export const productAttributeTable = v.object({
     data: v.array(productAttribute)
 })
 
+export const productAttributeValue = v.object({
+    id: v.string(),
+    value: v.string(),
+    productAttribute: v.object({
+        id: v.string(),
+        name: v.string()
+    })
+})
+
+export const productAttributeValuesList = v.object({
+    id: v.string(),
+    name: v.string(),
+    values: v.array(v.string())
+})
+
 export const productAttributeFormSchema = toTypedSchema(productAttributeForm)
 
 export const productAttributeSearchSchema = toTypedSchema(productAttributeSearch)
@@ -80,3 +95,7 @@ export type IProductAttributeList = v.InferInput<typeof productAttributeList>
 export type IProductAttribute = v.InferInput<typeof productAttribute>
 
 export type IProductAttributeTable = v.InferInput<typeof productAttributeTable>
+
+export type IProductAttributeValue = v.InferInput<typeof productAttributeValue>
+
+export type IProductAttributeValuesList = v.InferInput<typeof productAttributeValuesList>

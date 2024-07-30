@@ -43,7 +43,7 @@ const onSubmit = handleSubmit(async values => {
                 <ProductProductInitGeneral :is-single="false" />
                 <ProductProductInitSpecifications />
                 <ProductProductInitDescription />
-                <!-- <ProductProductInitAttributes /> -->
+                <ProductProductInitVariants />
                 <ProductProductInitMetaSEO :number="5" />
 
                 <div class="col-span-12">
