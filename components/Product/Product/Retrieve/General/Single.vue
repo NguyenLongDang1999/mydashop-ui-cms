@@ -1,11 +1,19 @@
 <script setup lang="ts">
 
+// ** Props & Emits
+interface Props {
+    data: IProductSingleForm
+}
+
+const props = defineProps<Props>()
+
 // ** useHooks
-const { isPending, mutateAsync } = useProductFormInput()
+const { category_id } = useProductSelectedWithCategory()
+const { isPending, mutateAsync } = useProductFormInput<IProductSingleForm>()
 
 const { handleSubmit, values: product, setFieldValue } = useForm<IProductSingleForm>({
     validationSchema: productSingleFormSchema,
-    initialValues: productSingleFormDefaultValues
+    initialValues: _omitBy(props.data, _isNil)
 })
 
 provide('product', product)
@@ -13,25 +21,37 @@ provide('product', product)
 // ** Watch
 watch(() => product.name, () => setFieldValue('slug', slugify(product.name)))
 
-// ** Methods
-const onSubmit = handleSubmit(async values => {
-    await mutateAsync({
-        ...values,
-        technical_specifications: product.technical_specifications ? JSON.stringify(product.technical_specifications) : undefined
-    })
+// ** Lifecycle
+nextTick(() => category_id.value = props.data.product_category_id)
 
-    navigateTo(ROUTER.PRODUCT)
-})
+// ** Methods
+const onSubmit = handleSubmit(values => mutateAsync({
+    id: values.id,
+    sku: values.sku,
+    name: values.name,
+    slug: values.slug,
+    status: values.status,
+    short_description: values.short_description,
+    description: values.description,
+    technical_specifications: values.technical_specifications,
+    price: values.price,
+    special_price: values.special_price,
+    special_price_type: values.special_price_type,
+    meta_title: values.meta_title,
+    meta_description: values.meta_description,
+    product_category_id: values.product_category_id,
+    product_brand_id: values.product_brand_id
+}))
 </script>
 
 <template>
     <UForm
-        :state="productSingleFormSchema"
+        :state="{}"
         @submit="onSubmit"
     >
         <UCard>
             <template #header>
-                <BaseCardTitle title="Thêm mới sản phẩm (Đơn thể)" />
+                <BaseCardTitle title="Thông tin chi tiết" />
             </template>
 
             <div class="grid gap-4 grid-cols-12">
@@ -46,7 +66,7 @@ const onSubmit = handleSubmit(async values => {
                             type="submit"
                             size="sm"
                             variant="solid"
-                            label="Thêm Mới"
+                            label="Cập Nhật"
                             :loading="Boolean(isPending)"
                             :trailing="false"
                         />
@@ -56,7 +76,7 @@ const onSubmit = handleSubmit(async values => {
                             size="sm"
                             color="gray"
                             variant="solid"
-                            label="Huỷ Bỏ"
+                            label="Quay Lại"
                             :trailing="false"
                             @click="$router.go(-1)"
                         />

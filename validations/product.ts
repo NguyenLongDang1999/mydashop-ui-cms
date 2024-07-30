@@ -57,7 +57,7 @@ export const productSingleForm = v.object({
         v.string(`${productLabel.description} không được bỏ trống.`),
         v.nonEmpty(`${productLabel.description} không được bỏ trống.`)
     ),
-    short_description: v.optional(v.string()),
+    short_description: v.optional(v.string(), 'imaaa'),
     technical_specifications: v.array(
         v.object({
             title: v.pipe(
@@ -70,12 +70,11 @@ export const productSingleForm = v.object({
             )
         })
     ),
-    price: v.number(`${productLabel.price} không được bỏ trống.`),
-    quantity: v.number(`${productLabel.quantity} không được bỏ trống.`),
-    special_price_type: v.number(`${productLabel.special_price_type} không được bỏ trống.`),
-    special_price: v.number(`${productLabel.special_price} không được bỏ trống.`),
-    manage_inventory: v.optional(v.number()),
-    product_type: v.optional(v.number()),
+    price: v.optional(v.number(`${productLabel.price} không được bỏ trống.`), 0),
+    quantity: v.optional(v.number(), 0),
+    special_price_type: v.optional(v.number(`${productLabel.special_price_type} không được bỏ trống.`), SPECIAL_PRICE.PRICE),
+    special_price: v.optional(v.number(`${productLabel.special_price} không được bỏ trống.`), 0),
+    manage_inventory: v.optional(v.number(), MANAGE_INVENTORY.NO),
     product_brand_id: v.optional(v.string()),
     status: v.optional(v.number()),
     image_uri: v.optional(v.string()),
@@ -206,3 +205,6 @@ export type IProductVariantForm = v.InferInput<typeof productVariantForm>
 export type IProductSearch = v.InferInput<typeof productSearch>
 
 export type IProduct = v.InferInput<typeof product>
+
+// ** Default Values
+export const productSingleFormDefaultValues = v.getDefaults(productSingleForm)
