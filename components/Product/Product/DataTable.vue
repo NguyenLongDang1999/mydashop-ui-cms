@@ -1,7 +1,15 @@
 <script setup lang="ts">
 
+// ** Props & Emits
+interface Props {
+    notFlashDeals?: boolean
+    productIdFlashDeals?: string
+}
+
+const props = defineProps<Props>()
+
 // ** useHooks
-const { productCategoryId, productBrandId, isFetching, dataTable, dataAggregations } = useProductDataTable()
+const { productCategoryId, productBrandId, isFetching, dataTable, dataAggregations } = useProductDataTable(props.notFlashDeals, props.productIdFlashDeals)
 const { isPending, mutateAsync } = useProductFormDelete()
 
 // ** Data
@@ -24,6 +32,7 @@ if (productCategoryId || productBrandId) {
             :columns="productTableColumns"
             :loading="Boolean(isFetching) || Boolean(isPending)"
             class="w-full"
+            v-bind="$attrs"
         >
             <template #name-data="{ row }: IRow<IProduct>">
                 <ULink :to="goToPage(ROUTER.PRODUCT_GENERAL, row.id, ROUTER.PRODUCT)">
