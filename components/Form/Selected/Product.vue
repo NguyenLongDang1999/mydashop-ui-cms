@@ -15,6 +15,8 @@ const { errorMessage, setValue } = useField<string[]>(() => props.name, undefine
 })
 
 // ** Data
+const product_id = inject('product_id') as string[]
+const dataTable = ref<IProduct[]>([])
 const selected = ref<IProduct[]>([])
 const productTableColumns = ref(_clone(productColumns))
 
@@ -26,6 +28,7 @@ const error = computed(() => errorMessage.value)
 
 // ** Watch
 watch(selected, newValue => setValue(newValue.map(_s => _s.id)))
+watch(dataTable, () => selected.value = dataTable.value.filter(_d => product_id.includes(_d.id)))
 </script>
 
 <template>
@@ -35,7 +38,10 @@ watch(selected, newValue => setValue(newValue.map(_s => _s.id)))
     >
         <div class="grid gap-4 grid-cols-12">
             <div class="col-span-12">
-                <ProductProductDataTable v-model="selected" />
+                <ProductProductDataTable
+                    v-model="selected"
+                    @data-table="val => dataTable = val"
+                />
             </div>
         </div>
     </UFormGroup>

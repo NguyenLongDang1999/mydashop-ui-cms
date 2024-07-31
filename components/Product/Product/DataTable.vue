@@ -7,6 +7,7 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+const emits = defineEmits(['dataTable'])
 
 // ** useHooks
 const { productCategoryId, productBrandId, isFetching, dataTable, dataAggregations } = useProductDataTable(props.notFlashDeals, props.productIdFlashDeals)
@@ -18,6 +19,9 @@ const productTableColumns = ref(_clone(productColumns))
 if (productCategoryId || productBrandId) {
     productTableColumns.value.pop()
 }
+
+// ** Watch
+watch(dataTable, () => emits('dataTable', dataTable.value))
 </script>
 
 <template>

@@ -11,6 +11,8 @@ const { values: productCollection, handleSubmit, setFieldValue } = useForm<IProd
     initialValues: _omitBy(data.value, _isNil)
 })
 
+provide('product_id', productCollection.product_id)
+
 // ** Methods
 const onSubmit = handleSubmit(values => mutateAsync(values))
 </script>
@@ -65,10 +67,7 @@ const onSubmit = handleSubmit(values => mutateAsync(values))
                         </div>
 
                         <div class="col-span-12">
-                            <FormSelectedProduct
-                                name="product_id"
-                                :product-id="productCollection.product_id"
-                            />
+                            <FormSelectedProduct name="product_id" />
                         </div>
 
                         <div class="col-span-12">
