@@ -21,7 +21,7 @@ if (productCategoryId || productBrandId) {
 }
 
 // ** Watch
-watch(dataTable, () => emits('dataTable', dataTable.value))
+watchEffect(() => emits('dataTable', dataTable.value))
 </script>
 
 <template>
