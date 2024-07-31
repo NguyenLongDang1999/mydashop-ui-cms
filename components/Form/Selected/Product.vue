@@ -16,8 +16,8 @@ const { errorMessage, setValue } = useField<string[]>(() => props.name, undefine
 
 // ** Data
 const product_id = inject('product_id') as string[]
-const dataTable = ref<IProduct[]>([])
 const selected = ref<IProduct[]>([])
+const dataTable = ref<IProduct[]>([])
 const productTableColumns = ref(_clone(productColumns))
 
 // ** Set Data

@@ -22,6 +22,7 @@ const queryKey = {
 const pathKey = {
     index: path.value,
     id: `${path.value}/$id`,
+    idRelations: `${path.value}/$id/relations`,
     dataList: `${path.value}/data-list`,
     generateVariant: `${path.value}/generate-variant`
 }
@@ -121,7 +122,7 @@ export const useProductRetrieve = async () => {
         to: goToPage(ROUTER.PRODUCT_IMAGES, params.id as string, ROUTER.PRODUCT)
     }]
 
-    const { data, suspense } = useQuery<IProductFormVariant>({
+    const { data, suspense } = useQuery<IProductVariantForm>({
         queryKey: [queryKey.retrieve, params.id],
         queryFn: () => useFetcher(pathQueryKey(pathKey.id, params.id))
     })
@@ -151,16 +152,33 @@ export const useProductRetrieve = async () => {
     return {
         productTypeSingle,
         links: computedItems,
-        data: computed(() => data.value as IProductFormVariant || {})
+        data: computed(() => data.value as IProductVariantForm || {})
     }
 }
 
-export const useProductFormInput = <T extends { id?: string } = IProductFormVariant>() => {
+export const useProductFormInput = <T extends { id?: string } = IProductVariantForm>() => {
     const queryClient = useQueryClient()
 
     return useMutation<T, Error, T>({
         mutationFn: body => useFetcher(body.id ? pathQueryKey(pathKey.id, body.id) : pathKey.index, {
             method: body.id ? 'PATCH' : 'POST',
+            body
+        }),
+        onSuccess: (_data, variables) => {
+            queryClient.refetchQueries({ queryKey: [queryKey.dataTable] })
+            if (variables.id) queryClient.invalidateQueries({ queryKey: [queryKey.retrieve, variables.id] })
+
+            useNotification(MESSAGE.SUCCESS)
+        }
+    })
+}
+
+export const useProductRelationsForm = () => {
+    const queryClient = useQueryClient()
+
+    return useMutation<IProductRelationsForm, Error, IProductRelationsForm>({
+        mutationFn: body => useFetcher(pathQueryKey(pathKey.idRelations, body.id!), {
+            method: 'PATCH',
             body
         }),
         onSuccess: (_data, variables) => {
