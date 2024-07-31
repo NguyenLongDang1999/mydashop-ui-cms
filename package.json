@@ -16,7 +16,7 @@
         "@vee-validate/valibot": "^4.13.2",
         "@vueup/vue-quill": "^1.2.0",
         "nuxt": "^3.12.4",
-        "valibot": "^0.36.0",
+        "valibot": "^0.37.0",
         "vue": "latest",
         "vue-currency-input": "^3.1.0"
     },

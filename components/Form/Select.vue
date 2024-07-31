@@ -27,7 +27,6 @@ const error = computed(() => errorMessage.value)
 const dataList = computed(() => props.options.filter(option =>
     Array.isArray(value.value) && (value.value as number[])?.includes(option.id as number)
 ))
-
 </script>
 
 <template>
