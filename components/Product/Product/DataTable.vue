@@ -36,6 +36,7 @@ watchEffect(() => emits('dataTable', dataTable.value))
         :data-aggregations="dataAggregations"
         :columns="productTableColumns"
         :loading="isFetching || isPending"
+        v-bind="$attrs"
     >
         <BaseDataTableColumnInformation
             v-if="areValuesEqual(column.key, PRODUCT_KEYS.NAME)"

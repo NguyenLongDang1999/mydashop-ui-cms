@@ -10,7 +10,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-defineEmits(['imageUrl'])
+const emits = defineEmits(['imageUrl'])
 
 // ** useHooks
 const { search, dataTable, isFetching, pathSplit, pathURL } = useFileManagerDataTable()
@@ -101,6 +101,7 @@ watch(() => props.closeButton, () => pathURL.value = '')
                 v-if="areValuesEqual(column.key, FILE_MANAGER_KEYS.NAME)"
                 :row="row"
                 :close-button="closeButton"
+                @image-url="val => emits('imageUrl', val)"
             />
 
             <span v-if="areValuesEqual(column.key, FILE_MANAGER_KEYS.SIZE)">{{ row.Length ? (row.Length / 1000).toFixed(2) + ' kB' : '-' }} </span>

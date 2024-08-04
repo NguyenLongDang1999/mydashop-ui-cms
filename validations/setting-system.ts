@@ -11,6 +11,10 @@ export const settingSystemLabel = {
     setting_system_options: {
         id: 'Key',
         name: 'Value'
+    },
+    home_slider: {
+        image_uri: 'Ảnh đại diện',
+        image_link: 'Đường dẫn URL'
     }
 }
 
@@ -51,6 +55,22 @@ export const settingSystemProductCategoryForm = v.object({
     product_category_id: v.array(v.string())
 })
 
+export const settingSystemSliderForm = v.object({
+    home_slider: v.array(
+        v.object({
+            image_uri: v.pipe(
+                v.string(`${settingSystemLabel.home_slider.image_uri} không được bỏ trống.`),
+                v.nonEmpty(`${settingSystemLabel.home_slider.image_uri} không được bỏ trống.`)
+            ),
+            image_link: v.pipe(
+                v.string(`${settingSystemLabel.home_slider.image_link} không được bỏ trống.`),
+                v.nonEmpty(`${settingSystemLabel.home_slider.image_link} không được bỏ trống.`),
+                v.url(`${settingSystemLabel.home_slider.image_link} không đúng định dạng.`)
+            )
+        })
+    )
+})
+
 export const settingSystemProductCollectionForm = v.object({
     selected_product_collection_id: v.string(),
     product_collection_id: v.array(v.string()),
@@ -69,12 +89,16 @@ export const metadata = v.object({
 
 export const settingSystemFormSchema = toTypedSchema(settingSystemForm)
 
+export const settingSystemSliderFormSchema = toTypedSchema(settingSystemSliderForm)
+
 export const settingSystemProductCategoryFormSchema = toTypedSchema(settingSystemProductCategoryForm)
 
 export const settingSystemProductCollectionFormSchema = toTypedSchema(settingSystemProductCollectionForm)
 
 // ** Types
 export type ISettingSystemForm = v.InferInput<typeof settingSystemForm>
+
+export type ISettingSystemSliderForm = v.InferInput<typeof settingSystemSliderForm>
 
 export type ISettingSystemProductCategoryForm = v.InferInput<typeof settingSystemProductCategoryForm>
 

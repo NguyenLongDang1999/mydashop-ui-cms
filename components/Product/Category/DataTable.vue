@@ -1,5 +1,8 @@
 <script setup lang="ts">
 
+// ** Props & Emits
+const emits = defineEmits(['dataTable'])
+
 // ** useHooks
 const { productBrandId, dataTable, dataAggregations, isFetching } = useProductCategoryDataTable()
 const { isPending, mutateAsync } = useProductCategoryFormDelete()
@@ -10,6 +13,9 @@ const productCategoryTableColumns = ref(_clone(productCategoryColumns))
 if (productBrandId) {
     productCategoryTableColumns.value.pop()
 }
+
+// ** Watch
+watchEffect(() => emits('dataTable', dataTable.value))
 </script>
 
 <template>
@@ -21,6 +27,7 @@ if (productBrandId) {
         :data-aggregations="dataAggregations"
         :columns="productCategoryTableColumns"
         :loading="isFetching || isPending"
+        v-bind="$attrs"
     >
         <BaseDataTableColumnInformation
             v-if="areValuesEqual(column.key, PRODUCT_CATEGORY_KEYS.NAME)"

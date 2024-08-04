@@ -3,8 +3,6 @@
 // ** Props & Emits
 interface Props {
     name: string
-    notFlashDeals?: boolean
-    productIdFlashDeals?: string
 }
 
 const props = defineProps<Props>()
@@ -16,8 +14,8 @@ const { errorMessage, setValue } = useField<string[]>(() => props.name, undefine
 
 // ** Data
 const product_id = inject('product_id', []) as string[]
-const selected = ref<IProduct[]>([])
-const dataTable = ref<IProduct[]>([])
+const selected = ref<IProductCategory[]>([])
+const dataTable = ref<IProductCategory[]>([])
 
 // ** Computed
 const error = computed(() => errorMessage.value)
@@ -34,7 +32,7 @@ watch(dataTable, () => selected.value = dataTable.value.filter(_d => product_id.
     >
         <div class="grid gap-4 grid-cols-12">
             <div class="col-span-12">
-                <ProductProductDataTable
+                <ProductCategoryDataTable
                     v-model="selected"
                     @data-table="val => dataTable = val"
                 />

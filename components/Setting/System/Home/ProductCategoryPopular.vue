@@ -59,7 +59,7 @@ const onSubmit = handleSubmit(values => mutateAsync({
             </div>
 
             <div class="col-span-12">
-                <FormCategorySearchSelected name="product_category_id" />
+                <FormSelectedCategory name="product_category_id" />
             </div>
 
             <div class="col-span-12">

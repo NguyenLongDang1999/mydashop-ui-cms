@@ -17,6 +17,7 @@ defineProps<Props>()
             :rows="dataTable as any"
             :columns="columns"
             :loading="loading"
+            v-bind="$attrs"
             class="w-full"
         >
             <template
