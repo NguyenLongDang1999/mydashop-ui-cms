@@ -11,26 +11,32 @@ const queryKey = {
 
 export const fileManagerColumns: Columns[] = [
     {
-        key: 'name',
+        key: FILE_MANAGER_KEYS.NAME,
         label: 'Tiêu đề',
         class: minWithColumn(350)
     },
     {
-        key: 'size',
+        key: FILE_MANAGER_KEYS.SIZE,
         label: 'Kích thước',
         class: minWithColumn(160)
     },
     {
-        key: 'date_modified',
+        key: FILE_MANAGER_KEYS.DATE_MODIFIED,
         label: 'Ngày chỉnh sửa',
         class: minWithColumn(250)
     },
     {
-        key: 'actions',
+        key: CORE_KEYS.ACTION,
         label: 'Thao tác',
         class: minWithColumn(100)
     }
 ]
+
+export default function () {
+    return {
+        pathURL
+    }
+}
 
 export const useFileManagerDataTable = () => {
     // ** Data

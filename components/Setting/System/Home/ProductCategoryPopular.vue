@@ -26,7 +26,6 @@ const onSubmit = handleSubmit(values => mutateAsync({
     key: HOME_SETTING.PRODUCT_CATEGORIES_POPULAR,
     value: JSON.stringify(values.product_category_id),
     input_type: INPUT_TYPE.TEXT
-
 }))
 </script>
 

@@ -40,17 +40,6 @@ watch(pathURL, () => {
 })
 
 watch(() => props.closeButton, () => pathURL.value = '')
-
-// ** Methods
-const generateDynamicPath = (objectName: string) => {
-    const pathArray = (pathURL.value as string)
-        .split(',')
-        .filter(segment => segment.trim() !== '')
-
-    pathArray.push(objectName)
-
-    pathURL.value = pathArray.join(',')
-}
 </script>
 
 <template>
@@ -102,82 +91,45 @@ const generateDynamicPath = (objectName: string) => {
             </div>
         </div>
 
-        <div class="mt-4 flex border border-gray-200 dark:border-gray-700 relative rounded-md not-prose bg-white dark:bg-gray-900">
-            <UTable
-                :rows="dataTable"
-                :columns="fileManagerColumns"
-                :loading="Boolean(isFetching) || Boolean(isPending)"
-                class="w-full"
+        <BaseDataTableInit
+            v-slot="{ row, column }"
+            :data-table="dataTable"
+            :columns="fileManagerColumns"
+            :loading="isFetching || isPending"
+        >
+            <BaseDataTableColumnFileManager
+                v-if="areValuesEqual(column.key, FILE_MANAGER_KEYS.NAME)"
+                :row="row"
+                :close-button="closeButton"
+            />
+
+            <span v-if="areValuesEqual(column.key, FILE_MANAGER_KEYS.SIZE)">{{ row.Length ? (row.Length / 1000).toFixed(2) + ' kB' : '-' }} </span>
+
+            <span v-if="areValuesEqual(column.key, FILE_MANAGER_KEYS.DATE_MODIFIED)">
+                {{ formatDateTime(row.DateCreated) }}
+            </span>
+
+            <div
+                v-if="areValuesEqual(column.key, CORE_KEYS.ACTION)"
+                class="flex gap-2"
             >
-                <template #name-data="{ row }">
-                    <ULink
-                        v-if="!row.Length"
-                        class="flex items-center gap-2 font-medium text-primary hover:underline"
-                        @click="generateDynamicPath(row.ObjectName)"
-                    >
-                        <UIcon name="i-heroicons-folder" />
-                        <span class="truncate flex-1">{{ row.ObjectName }}</span>
-                    </ULink>
+                <UButton
+                    v-if="row.Length"
+                    icon="i-heroicons-eye"
+                    size="sm"
+                    square
+                    variant="solid"
+                    target="_blank"
+                    :to="getPathImageFile(formatPathFile(row.Path, row.ObjectName))"
+                />
 
-                    <UPopover
-                        v-else
-                        mode="hover"
-                    >
-                        <div
-                            class="flex items-center gap-2 font-medium w-full"
-                            @click="closeButton"
-                        >
-                            <UIcon
-                                name="i-heroicons-document"
-                                @click="$emit('imageUrl', formatPathFile(row.Path, row.ObjectName))"
-                            />
-                            <span
-                                class="truncate flex-1"
-                                @click="$emit('imageUrl', formatPathFile(row.Path, row.ObjectName))"
-                            >{{ row.ObjectName }}</span>
-                        </div>
-
-                        <template #panel>
-                            <div class="p-2">
-                                <UAvatar
-                                    :src="getPathImageFile(formatPathFile(row.Path, row.ObjectName))"
-                                    :alt="row.ObjectName"
-                                    size="lg"
-                                />
-                            </div>
-                        </template>
-                    </UPopover>
-                </template>
-
-                <template #size-data="{ row }">
-                    <span>{{ row.Length ? (row.Length / 1000).toFixed(2) + ' kB' : '-' }} </span>
-                </template>
-
-                <template #date_modified-data="{ row }">
-                    <span>{{ formatDateTime(row.DateCreated) }}</span>
-                </template>
-
-                <template #actions-data="{ row }">
-                    <div class="flex gap-2">
-                        <UButton
-                            v-if="row.Length"
-                            icon="i-heroicons-eye"
-                            size="sm"
-                            square
-                            variant="solid"
-                            target="_blank"
-                            :to="getPathImageFile(formatPathFile(row.Path, row.ObjectName))"
-                        />
-
-                        <BaseConfirm
-                            :remove="() => mutateAsync({
-                                folder_name: row.ObjectName,
-                                is_folder: !row.Length
-                            })"
-                        />
-                    </div>
-                </template>
-            </UTable>
-        </div>
+                <BaseConfirm
+                    :remove="() => mutateAsync({
+                        folder_name: row.ObjectName,
+                        is_folder: !row.Length
+                    })"
+                />
+            </div>
+        </BaseDataTableInit>
     </UCard>
 </template>

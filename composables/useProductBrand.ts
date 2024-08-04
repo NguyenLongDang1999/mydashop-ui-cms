@@ -21,26 +21,26 @@ const pathKey = {
 
 export const productBrandColumns: Columns[] = [
     {
-        key: 'name',
+        key: PRODUCT_BRAND_KEYS.NAME,
         label: 'Thông tin thương hiệu',
         class: minWithColumn(180)
     },
     {
-        key: 'product_category_id',
+        key: PRODUCT_BRAND_KEYS.PRODUCT_CATEGORY_ID,
         label: 'Danh mục',
-        class: minWithColumn(350)
+        class: minWithColumn(180)
     },
     {
-        key: 'status',
+        key: PRODUCT_BRAND_KEYS.STATUS,
         label: 'Trạng thái'
     },
     {
-        key: 'created_at',
+        key: PRODUCT_BRAND_KEYS.CREATED_AT,
         label: 'Ngày tạo',
         class: minWithColumn(120)
     },
     {
-        key: 'actions',
+        key: CORE_KEYS.ACTION,
         label: 'Thao tác',
         class: minWithColumn(100)
     }

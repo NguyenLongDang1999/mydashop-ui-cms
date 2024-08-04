@@ -8,53 +8,48 @@ const { isPending, mutateAsync } = useProductCollectionFormDelete()
 <template>
     <ProductCollectionSearch />
 
-    <div class="mt-4 flex border border-gray-200 dark:border-gray-700 relative rounded-md not-prose bg-white dark:bg-gray-900">
-        <UTable
-            :rows="dataTable"
-            :columns="productCollectionColumns"
-            :loading="Boolean(isFetching) || Boolean(isPending)"
-            class="w-full"
+    <BaseDataTableInit
+        v-slot="{ row, column }: IRow<IProductCollection>"
+        :data-table="dataTable"
+        :data-aggregations="dataAggregations"
+        :columns="productCollectionColumns"
+        :loading="isFetching || isPending"
+    >
+        <BaseDataTableColumnInformation
+            v-if="areValuesEqual(column.key, PRODUCT_COLLECTION_KEYS.NAME)"
+            :to="goToPage(row.id, ROUTER.PRODUCT_COLLECTION)"
+            :name="row.title"
+            :count="`${row.product.length} Sản Phẩm`"
+        />
+
+        <UToggle
+            v-if="areValuesEqual(column.key, PRODUCT_COLLECTION_KEYS.STATUS)"
+            :model-value="areValuesEqual(row.status, STATUS.ACTIVE)"
+        />
+
+        <span v-if="areValuesEqual(column.key, PRODUCT_COLLECTION_KEYS.CREATED_AT)">
+            {{ formatDateTime(row.created_at) }}
+        </span>
+
+        <div
+            v-if="areValuesEqual(column.key, CORE_KEYS.ACTION)"
+            class="flex gap-2"
         >
-            <template #name-data="{ row }: IRow<IProductCollection>">
-                <ULink :to="goToPage(row.id, ROUTER.PRODUCT_COLLECTION)">
-                    <div class="flex items-center gap-1">
-                        <div class="flex flex-col flex-1 truncate">
-                            <span class="capitalize text-primary truncate">{{ row.title }}</span>
-                            <span>{{ row.product.length }} Sản Phẩm</span>
-                        </div>
-                    </div>
-                </ULink>
-            </template>
+            <UButton
+                icon="i-heroicons-pencil-square"
+                size="sm"
+                color="orange"
+                square
+                variant="solid"
+                :to="goToPage(row.id, ROUTER.PRODUCT_COLLECTION)"
+            />
 
-            <template #status-data="{ row }: IRow<IProductCollection>">
-                <UToggle :model-value="areValuesEqual(row.status, STATUS.ACTIVE)" />
-            </template>
-
-            <template #created_at-data="{ row }: IRow<IProductCollection>">
-                <span>{{ formatDateTime(row.created_at) }}</span>
-            </template>
-
-            <template #actions-data="{ row }: IRow<IProductCollection>">
-                <div class="flex gap-2">
-                    <UButton
-                        icon="i-heroicons-pencil-square"
-                        size="sm"
-                        color="orange"
-                        square
-                        variant="solid"
-                        :to="goToPage(row.id, ROUTER.PRODUCT_COLLECTION)"
-                    />
-
-                    <BaseConfirm
-                        :remove="() => mutateAsync({
-                            id: row.id,
-                            slug: row.slug
-                        })"
-                    />
-                </div>
-            </template>
-        </UTable>
-    </div>
-
-    <BasePagination :data-aggregations="dataAggregations" />
+            <BaseConfirm
+                :remove="() => mutateAsync({
+                    id: row.id,
+                    slug: row.slug
+                })"
+            />
+        </div>
+    </BaseDataTableInit>
 </template>

@@ -18,21 +18,21 @@ const pathKey = {
 
 export const productCollectionColumns: Columns[] = [
     {
-        key: 'name',
+        key: PRODUCT_COLLECTION_KEYS.NAME,
         label: 'Thông tin bộ sưu tập',
         class: minWithColumn(250)
     },
     {
-        key: 'status',
+        key: PRODUCT_COLLECTION_KEYS.STATUS,
         label: 'Trạng thái'
     },
     {
-        key: 'created_at',
+        key: PRODUCT_COLLECTION_KEYS.CREATED_AT,
         label: 'Ngày tạo',
         class: minWithColumn(120)
     },
     {
-        key: 'actions',
+        key: CORE_KEYS.ACTION,
         label: 'Thao tác',
         class: minWithColumn(100)
     }

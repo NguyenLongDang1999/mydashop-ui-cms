@@ -3,7 +3,7 @@ import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tansta
 
 // ** Types Imports
 import type { VerticalNavigationLink } from '#ui/types'
-import type { IProductFormVariant, IProductSearch, IProductTable } from '~/types/product.type'
+import type { IProductSearch, IProductTable } from '~/types/product.type'
 
 // ** Validations Imports
 import type { IProductGenerateVariants } from '~/validations/product-flash-deals'
@@ -29,36 +29,36 @@ const pathKey = {
 
 export const productColumns: Columns[] = [
     {
-        key: 'name',
+        key: PRODUCT_KEYS.NAME,
         label: 'Thông tin sản phẩm',
         class: minWithColumn(250)
     },
     {
-        key: 'price',
+        key: PRODUCT_KEYS.PRICE,
         label: 'Giá tiền',
         class: minWithColumn(200)
     },
     {
-        key: 'product_category_id',
+        key: PRODUCT_KEYS.PRODUCT_CATEGORY_ID,
         label: 'Danh mục',
         class: minWithColumn(200)
     },
     {
-        key: 'product_brand_id',
+        key: PRODUCT_KEYS.PRODUCT_BRAND_ID,
         label: 'Thương hiệu',
         class: minWithColumn(200)
     },
     {
-        key: 'status',
+        key: PRODUCT_KEYS.STATUS,
         label: 'Trạng thái'
     },
     {
-        key: 'created_at',
+        key: PRODUCT_KEYS.CREATED_AT,
         label: 'Ngày tạo',
         class: minWithColumn(120)
     },
     {
-        key: 'actions',
+        key: CORE_KEYS.ACTION,
         label: 'Thao tác',
         class: minWithColumn(100)
     }

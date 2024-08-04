@@ -39,7 +39,7 @@ export const productCollectionList = v.object({
 })
 
 export const productCollection = v.object({
-    ...productCollectionList.entries,
+    id: v.string(),
     title: v.string(),
     slug: v.string(),
     product: v.array(countSchema),

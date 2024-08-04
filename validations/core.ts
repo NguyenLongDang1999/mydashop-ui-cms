@@ -51,6 +51,7 @@ export type IOptions = v.InferInput<typeof optionsSchema>
 
 export interface IRow<T> {
     row: T
+    column: Columns
 }
 
 export interface Columns {

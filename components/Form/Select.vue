@@ -85,10 +85,12 @@ const dataList = computed(() => props.options.filter(option =>
             v-if="Array.isArray(value)"
             class="flex flex-wrap gap-1 mt-1"
         >
-            <template v-for="option in options">
+            <template
+                v-for="option in options"
+                :key="option.id"
+            >
                 <UButton
                     v-if="value.includes(option.id as never)"
-                    :key="option.id"
                     :label="option.name.replace(/\|---/g, '')"
                     :to="routePage ? goToPage(ROUTER.PRODUCT_GENERAL, option.id as string, routePage) : undefined"
                     size="2xs"
