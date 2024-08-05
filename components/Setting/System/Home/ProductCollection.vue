@@ -25,8 +25,6 @@ const product_collection = computed(() => {
     return result
 })
 
-console.log(product_collection.value)
-
 // ** useHooks
 const productCollectionList = useProductCollectionDataList()
 const { isPending, mutateAsync } = useSettingSystemFormInput()

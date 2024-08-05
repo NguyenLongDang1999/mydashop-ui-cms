@@ -17,7 +17,7 @@ const { errorMessage, value, setValue } = useField<string[]>(() => props.name, u
 const { productCategoryId, productBrandId, isFetching, dataTable, dataAggregations } = useProductDataTable()
 
 // ** Data
-const product_id = value.value
+const product_id = value.value || []
 const selected = ref<IProduct[]>([])
 const productTableColumns = ref(_clone(productColumns))
 
