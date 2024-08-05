@@ -2,6 +2,7 @@
 
 // ** Props & Emits
 interface Props {
+    columns?: Columns[]
     notFlashDeals?: boolean
     productIdFlashDeals?: string
 }
@@ -10,15 +11,13 @@ const props = defineProps<Props>()
 const emits = defineEmits(['dataTable'])
 
 // ** useHooks
-const { productCategoryId, productBrandId, isFetching, dataTable, dataAggregations } = useProductDataTable(props.notFlashDeals, props.productIdFlashDeals)
 const { isPending, mutateAsync } = useProductFormDelete()
+const { productCategoryId, productBrandId, isFetching, dataTable, dataAggregations } = useProductDataTable(props.notFlashDeals, props.productIdFlashDeals)
 
 // ** Data
-const productTableColumns = ref(_clone(productColumns))
+const productTableColumns = ref(_clone(props.columns || productColumns))
 
-if (productCategoryId || productBrandId) {
-    productTableColumns.value.pop()
-}
+if (productCategoryId || productBrandId) productTableColumns.value.pop()
 
 // ** Watch
 watchEffect(() => emits('dataTable', dataTable.value))

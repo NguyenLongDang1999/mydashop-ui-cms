@@ -6,12 +6,10 @@ const { data } = await useProductCollectionRetrieve()
 // ** useHooks
 const { isPending, mutateAsync } = useProductCollectionFormInput()
 
-const { values: productCollection, handleSubmit, setFieldValue } = useForm<IProductCollectionForm>({
+const { handleSubmit, setFieldValue } = useForm<IProductCollectionForm>({
     validationSchema: productCollectionFormSchema,
     initialValues: _omitBy(data.value, _isNil)
 })
-
-provide('product_id', productCollection.product_id)
 
 // ** Methods
 const onSubmit = handleSubmit(values => mutateAsync(values))

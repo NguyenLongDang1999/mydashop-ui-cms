@@ -100,7 +100,7 @@ export const useProductDataTable = (notFlashDeals?: boolean, productIdFlashDeals
         isFetching,
         productCategoryId,
         productBrandId,
-        dataTable: computed(() => data.value?.data || []),
+        dataTable: computed(() => data.value?.data as IProductTable[] || []),
         dataAggregations: computed(() => data.value?.aggregations || 0),
         suspense
     }

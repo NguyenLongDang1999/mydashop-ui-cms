@@ -44,15 +44,10 @@ const onSubmit = handleSubmit(values => mutateAsync({
     label: HOME_SETTING.PRODUCT_COLLECTION,
     key: HOME_SETTING.PRODUCT_COLLECTION,
     value: JSON.stringify({
-        product_collection: values.product_collection_id.map(_p => {
-
-            console.log(_p, values, values[`${_p}-product_id`])
-
-            return {
-                product_collection_id: _p,
-                product_id: values[`${_p}-product_id`]
-            }
-        })
+        product_collection: values.product_collection_id.map(_p => ({
+            product_collection_id: _p,
+            product_id: values[`${_p}-product_id`]
+        }))
     }),
     input_type: INPUT_TYPE.TEXT
 }))
