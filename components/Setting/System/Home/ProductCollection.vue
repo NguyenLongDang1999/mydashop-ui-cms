@@ -11,19 +11,14 @@ const props = defineProps<Props>()
 const productCollection = computed(() => props.data.find(_p => areValuesEqual(_p.key, HOME_SETTING.PRODUCT_COLLECTION)))
 const productCollectionValue = computed(() => typeof productCollection.value?.value === 'string' ? JSON.parse(productCollection.value?.value)?.product_collection : [])
 
-const product_collection = computed(() => {
-    const result: ISettingSystemProductCollectionForm  = {
-        product_collection_id: productCollectionValue.value.map((_p: { product_collection_id: string }) => _p.product_collection_id),
-        selected_product_collection_id: productCollectionValue.value[0]?.product_collection_id,
-        product_collection: []
-    }
-
-    productCollectionValue.value.forEach((_c: { product_collection_id: string, product_id: string }) => {
-        result[`${_c.product_collection_id}-product_id`] = _c.product_id
-    })
-
-    return result
-})
+const product_collection = computed(() => ({
+    product_collection_id: productCollectionValue.value.map((_p: { product_collection_id: string }) => _p.product_collection_id),
+    selected_product_collection_id: productCollectionValue.value[0]?.product_collection_id,
+    product_collection: productCollectionValue.value.map((_c: { product_collection_id: string, product_id: string[] }) => ({
+        product_collection_id: _c.product_collection_id,
+        product_id: _c.product_id
+    }))
+}))
 
 // ** useHooks
 const productCollectionList = useProductCollectionDataList()
@@ -44,7 +39,7 @@ const onSubmit = handleSubmit(values => mutateAsync({
     value: JSON.stringify({
         product_collection: values.product_collection_id.map(_p => ({
             product_collection_id: _p,
-            product_id: values[`${_p}-product_id`]
+            product_id: values.product_collection.find(pc => pc.product_collection_id === _p)?.product_id || []
         }))
     }),
     input_type: INPUT_TYPE.TEXT
