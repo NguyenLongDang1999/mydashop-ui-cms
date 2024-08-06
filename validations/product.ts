@@ -163,6 +163,16 @@ export const productVariantForm = v.object({
     product_related: v.optional(v.array(v.string()))
 })
 
+export const productImagesForm = v.object({
+    id: v.optional(v.string()),
+    image_uri: v.optional(v.string()),
+    product_images: v.array(
+        v.object({
+            image_uri: v.optional(v.string())
+        })
+    )
+})
+
 export const productRelationsForm = v.object({
     id: v.optional(v.string()),
     product_id: v.array(v.string()),
@@ -206,6 +216,8 @@ export const productRelationsFormSchema = toTypedSchema(productRelationsForm)
 
 export const productSearchSchema = toTypedSchema(productSearch)
 
+export const productImagesFormSchema = toTypedSchema(productImagesForm)
+
 // ** Types
 export type IProductSingleForm = v.InferInput<typeof productSingleForm>
 
@@ -218,6 +230,8 @@ export type IProductRelationsForm = v.InferInput<typeof productRelationsForm>
 export type IProductSearch = v.InferInput<typeof productSearch>
 
 export type IProduct = v.InferInput<typeof product>
+
+export type IProductImagesForm = v.InferInput<typeof productImagesForm>
 
 // ** Default Values
 export const productSingleFormDefaultValues = v.getDefaults(productSingleForm)
