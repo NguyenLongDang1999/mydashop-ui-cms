@@ -165,12 +165,8 @@ export const productVariantForm = v.object({
 
 export const productRelationsForm = v.object({
     id: v.optional(v.string()),
-    product_relations: v.optional(v.array(
-        v.object({
-            related_product_id: v.string(),
-            relation_type: v.number()
-        })
-    ))
+    product_id: v.array(v.string()),
+    product_relation_type: v.optional(v.number())
 })
 
 export const productSearch = v.object({

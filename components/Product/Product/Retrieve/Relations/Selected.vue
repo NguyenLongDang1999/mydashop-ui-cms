@@ -9,33 +9,21 @@ interface Props {
 
 const props = defineProps<Props>()
 
-// ** Data
-const selected = ref<IProduct[]>([])
-const dataTable = ref<IProduct[]>([])
-
-const relationTypeName = {
-    [RELATIONS_TYPE.UPSELL]: 'product_upsell',
-    [RELATIONS_TYPE.RELATED]: 'product_related',
-    [RELATIONS_TYPE.CROSS_SELL]: 'product_cross_sell'
-}
-
 // ** useHooks
 const { isPending, mutateAsync } = useProductRelationsForm()
 
-const { handleSubmit } = useForm({
-    validationSchema: productRelationsFormSchema
+const { handleSubmit, values } = useForm({
+    validationSchema: productRelationsFormSchema,
+    initialValues: {
+        product_id: props.modelValue as string[]
+    }
 })
-
-// ** Watch
-watch(dataTable, () => selected.value = dataTable.value.filter(_d => props.data[relationTypeName[props.name]].includes(_d.id)))
 
 // ** Methods
 const onSubmit = handleSubmit(() => mutateAsync({
     id: props.data.id!,
-    product_relations: selected.value.length ? selected.value.map(_s => ({
-        related_product_id: _s.id,
-        relation_type: props.name
-    })) : []
+    product_id: values.product_id!,
+    product_relation_type: props.name
 }))
 </script>
 
@@ -51,10 +39,7 @@ const onSubmit = handleSubmit(() => mutateAsync({
 
             <div class="grid gap-4 grid-cols-12">
                 <div class="col-span-12">
-                    <ProductProductDataTable
-                        v-model="selected"
-                        @data-table="val => dataTable = val"
-                    />
+                    <FormSelectedProduct name="product_id" />
                 </div>
             </div>
 
