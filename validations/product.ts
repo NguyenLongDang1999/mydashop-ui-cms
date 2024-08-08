@@ -77,7 +77,7 @@ export const productSingleForm = v.object({
     manage_inventory: v.optional(v.number(), MANAGE_INVENTORY.NO),
     product_brand_id: v.optional(v.string()),
     status: v.optional(v.number()),
-    image_uri: v.optional(v.string()),
+    image_uri: v.nullish(v.string()),
     meta_title: v.optional(v.string()),
     meta_description: v.optional(v.string())
 })
@@ -99,11 +99,11 @@ export const productVariants = v.object({
 
 export const productImagesForm = v.object({
     id: v.optional(v.string()),
-    image_uri: v.optional(v.string()),
+    image_uri: v.nullish(v.string()),
     product_images: v.array(
         v.object({
             id: v.optional(v.string()),
-            image_uri: v.optional(v.string())
+            image_uri: v.nullish(v.string())
         })
     )
 })
@@ -173,7 +173,7 @@ export const productVariantForm = v.object({
     ),
     product_images: v.array(productImagesForm),
     status: v.optional(v.number()),
-    image_uri: v.optional(v.string()),
+    image_uri: v.nullish(v.string()),
     meta_title: v.optional(v.string()),
     meta_description: v.optional(v.string()),
     product_upsell: v.optional(v.array(v.string())),

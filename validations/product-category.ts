@@ -24,7 +24,7 @@ export const productCategoryForm = v.object({
         v.nonEmpty(`${productCategoryLabel.slug} không được bỏ trống.`)
     ),
     parent_id: v.optional(v.string()),
-    image_uri: v.optional(v.string()),
+    image_uri: v.nullish(v.string()),
     status: v.optional(v.number()),
     description: v.optional(v.string()),
     meta_title: v.optional(v.string()),

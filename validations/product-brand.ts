@@ -25,7 +25,7 @@ export const productBrandForm = v.object({
         v.array(v.string(), `${productBrandLabel.product_category_id} không được bỏ trống.`),
         v.minLength(1, `${productBrandLabel.product_category_id} không được bỏ trống.`)
     ),
-    image_uri: v.optional(v.string()),
+    image_uri: v.nullish(v.string()),
     status: v.optional(v.number()),
     description: v.optional(v.string())
 })
