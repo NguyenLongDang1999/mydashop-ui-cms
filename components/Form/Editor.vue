@@ -29,7 +29,7 @@ const error = computed(() => errorMessage.value)
                 v-model:content="value"
                 theme="snow"
                 toolbar="full"
-                class="!h-[400px]"
+                class="!h-[400px] rounded-b-md"
                 content-type="html"
                 v-bind="$attrs"
             />
