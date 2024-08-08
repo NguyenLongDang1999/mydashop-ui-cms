@@ -24,13 +24,15 @@ const error = computed(() => errorMessage.value)
         :name="name"
         :error="error"
     >
-        <QuillEditor
-            v-model:content="value"
-            theme="snow"
-            toolbar="full"
-            class="!h-[400px]"
-            content-type="html"
-            v-bind="$attrs"
-        />
+        <ClientOnly>
+            <QuillEditor
+                v-model:content="value"
+                theme="snow"
+                toolbar="full"
+                class="!h-[400px]"
+                content-type="html"
+                v-bind="$attrs"
+            />
+        </ClientOnly>
     </UFormGroup>
 </template>
