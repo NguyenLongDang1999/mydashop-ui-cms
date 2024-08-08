@@ -38,7 +38,7 @@ export const productAttributeColumns: Columns[] = [
     {
         key: PRODUCT_ATTRIBUTE_KEYS.CREATED_AT,
         label: 'Ngày tạo',
-        class: minWithColumn(120)
+        class: minWithColumn(160)
     },
     {
         key: CORE_KEYS.ACTION,
