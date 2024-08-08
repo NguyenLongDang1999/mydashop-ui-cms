@@ -57,7 +57,7 @@ export const productSingleForm = v.object({
         v.string(`${productLabel.description} không được bỏ trống.`),
         v.nonEmpty(`${productLabel.description} không được bỏ trống.`)
     ),
-    short_description: v.optional(v.string(), 'imaaa'),
+    short_description: v.optional(v.string()),
     technical_specifications: v.array(
         v.object({
             title: v.pipe(
