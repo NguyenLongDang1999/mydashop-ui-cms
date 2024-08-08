@@ -12,7 +12,7 @@ const productImagesCount = computed(() => props.data.product_images?.length || 0
 const remainingUploads = computed(() => Math.max(6 - productImagesCount.value, 0))
 
 // ** useHooks
-const { isPending, mutateAsync } = useProductFormInput<IProductImagesForm>()
+const { isPending, mutateAsync } = useProductImagesForm()
 
 const { handleSubmit } = useForm<IProductImagesForm>({
     validationSchema: productImagesFormSchema,
@@ -28,7 +28,7 @@ const onSubmit = handleSubmit(values => mutateAsync({
 
 <template>
     <UForm
-        :state="{}"
+        :state="productImagesFormSchema"
         @submit="onSubmit"
     >
         <UCard>
@@ -44,24 +44,24 @@ const onSubmit = handleSubmit(values => mutateAsync({
                 <div class="col-span-12">
                     <div class="grid gap-4 grid-cols-12">
                         <div
-                            v-for="(_value, index) in data.product_images"
+                            v-for="(_, index) in data.product_images"
                             :key="index"
                             class="col-span-12"
                         >
                             <FormUpload
                                 label="Ảnh bổ sung"
-                                :name="`product_images.${index}.image_uri`"
+                                :name="`product_images[${index}].image_uri`"
                             />
                         </div>
 
                         <div
-                            v-for="(_value, index) in remainingUploads"
+                            v-for="(_, index) in remainingUploads"
                             :key="index"
                             class="col-span-12"
                         >
                             <FormUpload
                                 label="Ảnh bổ sung"
-                                :name="`product_images.${index + productImagesCount}.image_uri`"
+                                :name="`product_images[${index + productImagesCount}].image_uri`"
                             />
                         </div>
                     </div>

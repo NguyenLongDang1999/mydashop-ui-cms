@@ -97,6 +97,23 @@ export const productVariants = v.object({
     product_attribute_value_id: v.optional(v.array(v.string()))
 })
 
+export const productImagesForm = v.object({
+    id: v.optional(v.string()),
+    image_uri: v.optional(v.string()),
+    product_images: v.array(
+        v.object({
+            id: v.optional(v.string()),
+            image_uri: v.optional(v.string())
+        })
+    )
+})
+
+export const productRelationsForm = v.object({
+    id: v.optional(v.string()),
+    product_id: v.array(v.string()),
+    product_relation_type: v.optional(v.number())
+})
+
 export const productVariantForm = v.object({
     id: v.optional(v.string()),
     name: v.pipe(
@@ -154,6 +171,7 @@ export const productVariantForm = v.object({
         v.array(productVariants, `${productLabel.attribute.name} phải có ít nhất 1 giá trị.`),
         v.minLength(1, `${productLabel.attribute.name} phải có ít nhất 1 giá trị.`)
     ),
+    product_images: v.array(productImagesForm),
     status: v.optional(v.number()),
     image_uri: v.optional(v.string()),
     meta_title: v.optional(v.string()),
@@ -161,22 +179,6 @@ export const productVariantForm = v.object({
     product_upsell: v.optional(v.array(v.string())),
     product_cross_sell: v.optional(v.array(v.string())),
     product_related: v.optional(v.array(v.string()))
-})
-
-export const productImagesForm = v.object({
-    id: v.optional(v.string()),
-    image_uri: v.optional(v.string()),
-    product_images: v.array(
-        v.object({
-            image_uri: v.optional(v.string())
-        })
-    )
-})
-
-export const productRelationsForm = v.object({
-    id: v.optional(v.string()),
-    product_id: v.array(v.string()),
-    product_relation_type: v.optional(v.number())
 })
 
 export const productSearch = v.object({

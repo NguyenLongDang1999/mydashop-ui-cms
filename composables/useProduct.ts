@@ -22,8 +22,9 @@ const queryKey = {
 const pathKey = {
     index: path.value,
     id: `${path.value}/$id`,
-    idRelations: `${path.value}/$id/relations`,
     dataList: `${path.value}/data-list`,
+    idImages: `${path.value}/$id/images`,
+    idRelations: `${path.value}/$id/relations`,
     generateVariant: `${path.value}/generate-variant`
 }
 
@@ -178,6 +179,23 @@ export const useProductRelationsForm = () => {
 
     return useMutation<IProductRelationsForm, Error, IProductRelationsForm>({
         mutationFn: body => useFetcher(pathQueryKey(pathKey.idRelations, body.id!), {
+            method: 'PATCH',
+            body
+        }),
+        onSuccess: (_data, variables) => {
+            queryClient.refetchQueries({ queryKey: [queryKey.dataTable] })
+            if (variables.id) queryClient.invalidateQueries({ queryKey: [queryKey.retrieve, variables.id] })
+
+            useNotification(MESSAGE.SUCCESS)
+        }
+    })
+}
+
+export const useProductImagesForm = () => {
+    const queryClient = useQueryClient()
+
+    return useMutation<IProductImagesForm, Error, IProductImagesForm>({
+        mutationFn: body => useFetcher(pathQueryKey(pathKey.idImages, body.id!), {
             method: 'PATCH',
             body
         }),
