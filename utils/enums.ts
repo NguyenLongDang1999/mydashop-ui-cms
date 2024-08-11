@@ -31,7 +31,7 @@ export enum ROUTER {
 
     // ** PRODUCT RETRIEVE
     PRODUCT_GENERAL = 'general',
-    PRODUCT_ATTRIBUTES = 'attributes',
+    PRODUCT_VARIANTS = 'variants',
     PRODUCT_RELATIONS = 'relations',
     PRODUCT_IMAGES = 'images',
     PRODUCT_PRODUCT = 'product',

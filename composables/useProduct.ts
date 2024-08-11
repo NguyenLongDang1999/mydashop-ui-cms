@@ -146,7 +146,7 @@ export const useProductRetrieve = async () => {
             if (detailIndex !== -1) {
                 newItems.splice(detailIndex + 1, 0, {
                     label: 'Thuộc Tính Sản Phẩm',
-                    to: goToPage(ROUTER.PRODUCT_ATTRIBUTES, params.id as string, ROUTER.PRODUCT)
+                    to: goToPage(ROUTER.PRODUCT_VARIANTS, params.id as string, ROUTER.PRODUCT)
                 })
             }
         }

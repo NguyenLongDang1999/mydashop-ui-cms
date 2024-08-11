@@ -217,6 +217,31 @@ export const productUpdateGeneralVariantForm = v.object({
             })
         )
     ),
+    product_attribute_id: v.pipe(
+        v.array(v.string(), `${productLabel.attribute.name} không được bỏ trống.`),
+        v.minLength(1, `${productLabel.attribute.name} không được bỏ trống.`)
+    ),
+    product_attributes: v.pipe(
+        v.array(
+            v.object({
+                id: v.optional(v.string()),
+                name: v.pipe(
+                    v.string(`${productLabel.attribute.name} không được bỏ trống.`),
+                    v.nonEmpty(`${productLabel.attribute.name} không được bỏ trống.`)
+                ),
+                values: v.pipe(
+                    v.array(v.string(), `${productLabel.attribute.values} không được bỏ trống.`),
+                    v.minLength(1, `${productLabel.attribute.values} không được bỏ trống.`)
+                )
+            }),
+            `${productLabel.attribute.name} phải có ít nhất 1 giá trị.`
+        ),
+        v.minLength(1, `${productLabel.attribute.name} phải có ít nhất 1 giá trị.`)
+    ),
+    product_variants: v.pipe(
+        v.array(productVariants, `${productLabel.attribute.name} phải có ít nhất 1 giá trị.`),
+        v.minLength(1, `${productLabel.attribute.name} phải có ít nhất 1 giá trị.`)
+    ),
     is_variant: v.optional(v.boolean(), true),
     product_brand_id: v.optional(v.string()),
     status: v.optional(v.number()),
