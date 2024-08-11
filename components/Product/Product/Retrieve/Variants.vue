@@ -47,7 +47,7 @@ watch(() => product.product_attribute_id, () => {
 const handleIsDefault = (index: number) => {
     if (product.product_variants && product.product_variants.length) {
         product.product_variants.forEach((_item, _index) => {
-            setFieldValue(`product_variants[${_index}].is_default`, areValuesEqual(index, _index))
+            setFieldValue(`product_variants.${_index}.is_default`, areValuesEqual(index, _index))
         })
     }
 }
