@@ -2,7 +2,6 @@
 
 // ** useHooks
 const { isPending, mutateAsync } = useProductFormInput()
-const { attribute_id } = useProductAttributeValueList()
 
 const { handleSubmit, values: product, setFieldValue } = useForm<IProductVariantForm>({
     validationSchema: productVariantFormSchema
@@ -19,11 +18,8 @@ watch(() => product.name, () => setFieldValue('slug', slugify(product.name)))
 const onSubmit = handleSubmit(async values => {
     await mutateAsync({
         ...values,
-        product_variants: values.product_variants,
-        technical_specifications: product.technical_specifications ? JSON.stringify(product.technical_specifications) : undefined
+        product_variants: values.product_variants
     })
-
-    attribute_id.value = []
 
     navigateTo(ROUTER.PRODUCT)
 })

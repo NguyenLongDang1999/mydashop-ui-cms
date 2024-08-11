@@ -58,17 +58,19 @@ export const productSingleForm = v.object({
         v.nonEmpty(`${productLabel.description} không được bỏ trống.`)
     ),
     short_description: v.optional(v.string()),
-    technical_specifications: v.array(
-        v.object({
-            title: v.pipe(
-                v.string(`${productLabel.technical_specifications.title} không được bỏ trống.`),
-                v.nonEmpty(`${productLabel.technical_specifications.title} không được bỏ trống.`)
-            ),
-            content: v.pipe(
-                v.string(`${productLabel.technical_specifications.content} không được bỏ trống.`),
-                v.nonEmpty(`${productLabel.technical_specifications.content} không được bỏ trống.`)
-            )
-        })
+    technical_specifications: v.optional(
+        v.array(
+            v.object({
+                title: v.pipe(
+                    v.string(`${productLabel.technical_specifications.title} không được bỏ trống.`),
+                    v.nonEmpty(`${productLabel.technical_specifications.title} không được bỏ trống.`)
+                ),
+                content: v.pipe(
+                    v.string(`${productLabel.technical_specifications.content} không được bỏ trống.`),
+                    v.nonEmpty(`${productLabel.technical_specifications.content} không được bỏ trống.`)
+                )
+            })
+        )
     ),
     price: v.optional(v.number(`${productLabel.price} không được bỏ trống.`), 0),
     quantity: v.optional(v.number(), 0),
@@ -133,19 +135,20 @@ export const productVariantForm = v.object({
         v.nonEmpty(`${productLabel.description} không được bỏ trống.`)
     ),
     short_description: v.optional(v.string()),
-    technical_specifications: v.array(
-        v.object({
-            title: v.pipe(
-                v.string(`${productLabel.technical_specifications.title} không được bỏ trống.`),
-                v.nonEmpty(`${productLabel.technical_specifications.title} không được bỏ trống.`)
-            ),
-            content: v.pipe(
-                v.string(`${productLabel.technical_specifications.content} không được bỏ trống.`),
-                v.nonEmpty(`${productLabel.technical_specifications.content} không được bỏ trống.`)
-            )
-        })
+    technical_specifications: v.optional(
+        v.array(
+            v.object({
+                title: v.pipe(
+                    v.string(`${productLabel.technical_specifications.title} không được bỏ trống.`),
+                    v.nonEmpty(`${productLabel.technical_specifications.title} không được bỏ trống.`)
+                ),
+                content: v.pipe(
+                    v.string(`${productLabel.technical_specifications.content} không được bỏ trống.`),
+                    v.nonEmpty(`${productLabel.technical_specifications.content} không được bỏ trống.`)
+                )
+            })
+        )
     ),
-    product_type: v.optional(v.number()),
     product_brand_id: v.optional(v.string()),
     product_attribute_id: v.pipe(
         v.array(v.string(), `${productLabel.attribute.name} không được bỏ trống.`),
@@ -181,6 +184,46 @@ export const productVariantForm = v.object({
     product_related: v.optional(v.array(v.string()))
 })
 
+export const productUpdateGeneralVariantForm = v.object({
+    id: v.optional(v.string()),
+    name: v.pipe(
+        v.string(`${productLabel.name} không được bỏ trống.`),
+        v.nonEmpty(`${productLabel.name} không được bỏ trống.`)
+    ),
+    slug: v.pipe(
+        v.string(`${productLabel.slug} không được bỏ trống.`),
+        v.nonEmpty(`${productLabel.slug} không được bỏ trống.`)
+    ),
+    product_category_id: v.pipe(
+        v.string(`${productLabel.product_category_id} không được bỏ trống.`),
+        v.nonEmpty(`${productLabel.product_category_id} không được bỏ trống.`)
+    ),
+    description: v.pipe(
+        v.string(`${productLabel.description} không được bỏ trống.`),
+        v.nonEmpty(`${productLabel.description} không được bỏ trống.`)
+    ),
+    short_description: v.optional(v.string()),
+    technical_specifications: v.optional(
+        v.array(
+            v.object({
+                title: v.pipe(
+                    v.string(`${productLabel.technical_specifications.title} không được bỏ trống.`),
+                    v.nonEmpty(`${productLabel.technical_specifications.title} không được bỏ trống.`)
+                ),
+                content: v.pipe(
+                    v.string(`${productLabel.technical_specifications.content} không được bỏ trống.`),
+                    v.nonEmpty(`${productLabel.technical_specifications.content} không được bỏ trống.`)
+                )
+            })
+        )
+    ),
+    is_variant: v.optional(v.boolean(), true),
+    product_brand_id: v.optional(v.string()),
+    status: v.optional(v.number()),
+    meta_title: v.optional(v.string()),
+    meta_description: v.optional(v.string())
+})
+
 export const productSearch = v.object({
     ...paginationSchema.entries,
     sku: v.optional(v.string()),
@@ -214,6 +257,8 @@ export const productSingleFormSchema = toTypedSchema(productSingleForm)
 
 export const productVariantFormSchema = toTypedSchema(productVariantForm)
 
+export const productUpdateGeneralVariantFormSchema = toTypedSchema(productUpdateGeneralVariantForm)
+
 export const productRelationsFormSchema = toTypedSchema(productRelationsForm)
 
 export const productSearchSchema = toTypedSchema(productSearch)
@@ -226,6 +271,8 @@ export type IProductSingleForm = v.InferInput<typeof productSingleForm>
 export type IProductVariants = v.InferInput<typeof productVariants>
 
 export type IProductVariantForm = v.InferInput<typeof productVariantForm>
+
+export type IProductUpdateGeneralVariantForm = v.InferInput<typeof productUpdateGeneralVariantForm>
 
 export type IProductRelationsForm = v.InferInput<typeof productRelationsForm>
 

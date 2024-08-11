@@ -1,11 +1,18 @@
 <script setup lang="ts">
 
-// ** useHooks
-const { isPending, mutateAsync } = useProductFormInput<IProductSingleForm>()
+// ** Props & Emits
+interface Props {
+    data: IProductVariantForm
+}
 
-const { handleSubmit, values: product, setFieldValue } = useForm<IProductSingleForm>({
-    validationSchema: productSingleFormSchema,
-    initialValues: productSingleFormDefaultValues
+const props = defineProps<Props>()
+
+// ** useHooks
+const { isPending, mutateAsync } = useProductFormInput<IProductUpdateGeneralVariantForm>()
+
+const { handleSubmit, values: product, setFieldValue } = useForm<IProductUpdateGeneralVariantForm>({
+    validationSchema: productUpdateGeneralVariantFormSchema,
+    initialValues: _omitBy(props.data, _isNil)
 })
 
 provide('product', product)
@@ -14,25 +21,21 @@ provide('product', product)
 watch(() => product.name, () => setFieldValue('slug', slugify(product.name)))
 
 // ** Methods
-const onSubmit = handleSubmit(async values => {
-    await mutateAsync(values)
-
-    navigateTo(ROUTER.PRODUCT)
-})
+const onSubmit = handleSubmit(values => mutateAsync(values))
 </script>
 
 <template>
     <UForm
-        :state="productSingleFormSchema"
+        :state="productUpdateGeneralVariantFormSchema"
         @submit="onSubmit"
     >
         <UCard>
             <template #header>
-                <BaseCardTitle title="Thêm mới sản phẩm (Đơn thể)" />
+                <BaseCardTitle title="Thông tin chi tiết" />
             </template>
 
             <div class="grid gap-4 grid-cols-12">
-                <ProductProductInitGeneral />
+                <ProductProductInitGeneral :is-single="false" />
                 <ProductProductInitSpecifications />
                 <ProductProductInitDescription />
                 <ProductProductInitMetaSEO />
@@ -43,7 +46,7 @@ const onSubmit = handleSubmit(async values => {
                             type="submit"
                             size="sm"
                             variant="solid"
-                            label="Thêm Mới"
+                            label="Cập Nhật"
                             :loading="Boolean(isPending)"
                             :trailing="false"
                         />
@@ -53,7 +56,7 @@ const onSubmit = handleSubmit(async values => {
                             size="sm"
                             color="gray"
                             variant="solid"
-                            label="Huỷ Bỏ"
+                            label="Quay Lại"
                             :trailing="false"
                             @click="$router.go(-1)"
                         />

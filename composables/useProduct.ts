@@ -3,7 +3,7 @@ import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tansta
 
 // ** Types Imports
 import type { VerticalNavigationLink } from '#ui/types'
-import type { IProductSearch, IProductTable } from '~/types/product.type'
+import type { IProductTable } from '~/types/product.type'
 
 // ** Validations Imports
 import type { IProductGenerateVariants } from '~/validations/product-flash-deals'
@@ -22,6 +22,10 @@ const queryKey = {
 const pathKey = {
     index: path.value,
     id: `${path.value}/$id`,
+    createSingle: `${path.value}/create-single`,
+    idUpdateSingle: `${path.value}/$id/update-single`,
+    createVariants: `${path.value}/create-variants`,
+    idUpdateVariants: `${path.value}/$id/update-variants`,
     dataList: `${path.value}/data-list`,
     idImages: `${path.value}/$id/images`,
     idRelations: `${path.value}/$id/relations`,
@@ -131,7 +135,7 @@ export const useProductRetrieve = async () => {
     await suspense()
 
     // ** Computed
-    const productTypeSingle = computed(() => areValuesEqual(data.value?.product_type as number, PRODUCT_TYPE.SINGLE))
+    const productTypeSingle = computed(() => !data.value?.product_attributes.length)
 
     const computedItems = computed(() => {
         const newItems = [...links]
@@ -153,15 +157,24 @@ export const useProductRetrieve = async () => {
     return {
         productTypeSingle,
         links: computedItems,
-        data: computed(() => data.value as IProductVariantForm || {})
+        data: computed(() => data.value as IProductVariantForm)
     }
 }
 
-export const useProductFormInput = <T extends { id?: string } = IProductVariantForm>() => {
+export const useProductFormInput = <T extends { id?: string, is_variant?: boolean, product_attribute_id?: string[] } = IProductVariantForm>() => {
     const queryClient = useQueryClient()
 
     return useMutation<T, Error, T>({
-        mutationFn: body => useFetcher(body.id ? pathQueryKey(pathKey.id, body.id) : pathKey.index, {
+        mutationFn: body => useFetcher(body.id ?
+            (
+                !body.product_attribute_id && !body.is_variant ?
+                    pathQueryKey(pathKey.idUpdateSingle, body.id) :
+                    pathQueryKey(pathKey.idUpdateVariants, body.id)
+            ) : (
+                !body.product_attribute_id ?
+                    pathKey.createSingle :
+                    pathKey.createVariants
+            ), {
             method: body.id ? 'PATCH' : 'POST',
             body
         }),
@@ -228,32 +241,30 @@ export const useProductFormDelete = () => {
     })
 }
 
-export const useProductSelectedWithCategory = () => {
+export const useProductSelectedWithCategory = (product_category_id: ComputedRef<string>) => {
     // ** Data
     const endPoint = '/data-list-category'
-    const category_id = ref<string>()
 
     // ** useHooks
     const { path: pathBrand } = useProductBrand()
     const { path: pathAttribute } = useProductAttribute()
 
     const { isFetching: isFetchingBrand, data: dataBrand } = useQuery<IProductBrandList[]>({
-        queryKey: [pathBrand.value + queryKey.dataListCategory, category_id],
-        queryFn: () => useFetcher(`${pathBrand.value + endPoint}/${category_id.value}`),
-        enabled: () => !!category_id.value
+        queryKey: [pathBrand.value + queryKey.dataListCategory, product_category_id],
+        queryFn: () => useFetcher(`${pathBrand.value + endPoint}/${product_category_id.value}`),
+        enabled: () => !!product_category_id.value
     })
 
     const { isFetching: isFetchingAttribute, data: dataAttribute } = useQuery<IProductAttributeList[]>({
-        queryKey: [pathAttribute.value + queryKey.dataListCategory, category_id],
-        queryFn: () => useFetcher(`${pathAttribute.value + endPoint}/${category_id.value}`),
-        enabled: () => !!category_id.value
+        queryKey: [pathAttribute.value + queryKey.dataListCategory, product_category_id],
+        queryFn: () => useFetcher(`${pathAttribute.value + endPoint}/${product_category_id.value}`),
+        enabled: () => !!product_category_id.value
     })
 
     const brandList = computed(() => dataBrand.value || [])
     const attributeList = computed(() => dataAttribute.value || [])
 
     return {
-        category_id,
         brandList,
         isFetchingBrand,
         attributeList,

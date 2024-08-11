@@ -23,6 +23,7 @@ const error = computed(() => errorMessage.value)
         :label="label"
         :name="name"
         :error="error"
+        class="first:[&_.ql-toolbar.ql-snow]:rounded-t-md"
     >
         <ClientOnly>
             <QuillEditor

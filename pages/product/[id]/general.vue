@@ -2,6 +2,9 @@
 
 // ** useHooks
 const { data, links, productTypeSingle } = await useProductRetrieve()
+
+// ** Computed
+const productSingle = computed(() => data.value as unknown as IProductSingleForm)
 </script>
 
 <template>
@@ -11,7 +14,7 @@ const { data, links, productTypeSingle } = await useProductRetrieve()
     >
         <ProductProductRetrieveGeneralSingle
             v-if="productTypeSingle"
-            :data="data"
+            :data="productSingle"
         />
 
         <ProductProductRetrieveGeneralVariants

@@ -2,7 +2,7 @@
 
 // ** Props & Emits
 interface Props {
-    data: IProductVariantForm
+    data: IProductImagesForm
 }
 
 const props = defineProps<Props>()
@@ -19,11 +19,7 @@ const { handleSubmit } = useForm<IProductImagesForm>({
     initialValues: _omitBy(props.data, _isNil)
 })
 
-const onSubmit = handleSubmit(values => mutateAsync({
-    id: values.id,
-    image_uri: values.image_uri,
-    product_images: values.product_images
-}))
+const onSubmit = handleSubmit(values => mutateAsync(values))
 </script>
 
 <template>

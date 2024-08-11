@@ -1,18 +1,23 @@
 <script setup lang="ts">
 
-// ** useHooks
-const categoryList = useProductCategoryDataList()
-const { category_id, brandList, attributeList, isFetchingBrand, isFetchingAttribute } = useProductSelectedWithCategory()
-const { attribute_id, attributeValueList } = useProductAttributeValueList()
-
 // ** Data
 const product = inject('product') as IProductVariantForm
-const setFieldValue = inject('setFieldValue') as (field: string, value: unknown) => void
+const setFieldValue = inject('setFieldValue') as (field: keyof IProductVariantForm, value: unknown) => void
 
 const attributeValueName = ref<Omit<IProductAttributeValuesList[], 'values'>[]>([])
 
+// ** Computed
+const attributeIdList = computed(() => product.product_attribute_id || [])
+const productCategoryId = computed(() => product.product_category_id || '')
+const productAttributes = computed(() => product.product_attributes || [])
+
+// ** useHooks
+const categoryList = useProductCategoryDataList()
+const { attributeValueList } = useProductAttributeValueList(attributeIdList)
+const { brandList, attributeList, isFetchingBrand, isFetchingAttribute } = useProductSelectedWithCategory(productCategoryId)
+
 // ** Watch
-watch(attribute_id, () => {
+watch(() => product.product_attribute_id, () => {
     if (!product.product_attribute_id) return
 
     const attributeData = attributeList.value
@@ -28,20 +33,10 @@ watch(attribute_id, () => {
     setFieldValue('product_variants', [])
 })
 
-watch(() => product.product_category_id, () => {
-    category_id.value = product.product_category_id
-    attribute_id.value = []
-})
-
-// ** Computed
-const productAttributes = computed(() => product.product_attributes as IProductAttributeValuesList[] || [])
-
 // ** Methods
 const handleIsDefault = (index: number) => {
-    const variants = product.product_variants
-
-    if (variants && variants.length) {
-        variants.forEach((_item, _index) => {
+    if (product.product_variants && product.product_variants.length) {
+        product.product_variants.forEach((_item, _index) => {
             setFieldValue(`product_variants[${_index}].is_default`, areValuesEqual(index, _index))
         })
     }
@@ -125,7 +120,6 @@ const handleAttributeValues = (index: number) => {
 
     <div class="sm:col-span-4 col-span-12">
         <FormSelect
-            v-model="attribute_id"
             :label="productLabel.attribute.name"
             :options="attributeList"
             :loading="isFetchingAttribute"
@@ -134,10 +128,10 @@ const handleAttributeValues = (index: number) => {
         />
     </div>
 
-    <template v-if="attribute_id.length">
+    <template v-if="product.product_attribute_id?.length">
         <div class="col-span-12 flex flex-col gap-4">
             <div
-                v-for="(attributeItem, index) in productAttributes"
+                v-for="(attributeItem, index) in product.product_attributes"
                 :key="attributeItem.name"
                 class="grid grid-cols-12 gap-4"
             >
@@ -157,14 +151,6 @@ const handleAttributeValues = (index: number) => {
                         :options="getAttributeOptions(index)"
                         multiple
                         @update:model-value="handleAttributeValues(index)"
-                    />
-                </div>
-
-                <div class="col-span-1">
-                    <FormInput
-                        type="hidden"
-                        :model-value="attributeItem.id"
-                        :name="`product_attributes${index}.id`"
                     />
                 </div>
             </div>

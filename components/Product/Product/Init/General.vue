@@ -9,12 +9,15 @@ withDefaults(defineProps<Props>(), {
     isSingle: true
 })
 
-// ** useHooks
-const categoryList = useProductCategoryDataList()
-const { category_id, brandList, isFetchingBrand } = useProductSelectedWithCategory()
-
 // ** Data
 const product = inject('product') as IProductSingleForm
+
+// ** Computed
+const productCategoryId = computed(() => product.product_category_id || '')
+
+// ** useHooks
+const categoryList = useProductCategoryDataList()
+const { brandList, isFetchingBrand } = useProductSelectedWithCategory(productCategoryId)
 
 // ** Computed
 const isPercent = computed(() => areValuesEqual(product.special_price_type as number, SPECIAL_PRICE.PERCENT))
@@ -66,7 +69,6 @@ const isPercent = computed(() => areValuesEqual(product.special_price_type as nu
                 :label="productLabel.product_category_id"
                 :options="categoryList"
                 name="product_category_id"
-                @update:model-value="val => category_id = val"
             />
         </div>
 

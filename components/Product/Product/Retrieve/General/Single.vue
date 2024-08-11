@@ -8,7 +8,6 @@ interface Props {
 const props = defineProps<Props>()
 
 // ** useHooks
-const { category_id } = useProductSelectedWithCategory()
 const { isPending, mutateAsync } = useProductFormInput<IProductSingleForm>()
 
 const { handleSubmit, values: product, setFieldValue } = useForm<IProductSingleForm>({
@@ -21,32 +20,13 @@ provide('product', product)
 // ** Watch
 watch(() => product.name, () => setFieldValue('slug', slugify(product.name)))
 
-// ** Lifecycle
-nextTick(() => category_id.value = props.data.product_category_id)
-
 // ** Methods
-const onSubmit = handleSubmit(values => mutateAsync({
-    id: values.id,
-    sku: values.sku,
-    name: values.name,
-    slug: values.slug,
-    status: values.status,
-    short_description: values.short_description,
-    description: values.description,
-    technical_specifications: values.technical_specifications,
-    price: values.price,
-    special_price: values.special_price,
-    special_price_type: values.special_price_type,
-    meta_title: values.meta_title,
-    meta_description: values.meta_description,
-    product_category_id: values.product_category_id,
-    product_brand_id: values.product_brand_id
-}))
+const onSubmit = handleSubmit(values => mutateAsync(values))
 </script>
 
 <template>
     <UForm
-        :state="{}"
+        :state="productSingleFormSchema"
         @submit="onSubmit"
     >
         <UCard>

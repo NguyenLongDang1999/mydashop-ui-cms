@@ -154,21 +154,18 @@ export const useProductAttributeFormDelete = () => {
     })
 }
 
-export const useProductAttributeValueList = () => {
-    // ** Data
-    const attribute_id = ref<string[]>([])
-
+export const useProductAttributeValueList = (product_attribute_id: Ref<string[]>) => {
     const attributeData = useQueries({
-        queries: computed(() => attribute_id.value.map(_v => {
+        queries: computed(() => product_attribute_id.value.map(_v => {
             return {
                 queryKey: [queryKey.dataValueCategory, _v],
-                queryFn: () => useFetcher(`${path.value}/attribute-value-data-list/${_v}`)
+                queryFn: () => useFetcher(`${path.value}/attribute-value-data-list/${_v}`),
+                enabled: !!_v
             }
         }))
     })
 
     return {
-        attribute_id,
         attributeValueList: computed(() => attributeData.value)
     }
 }
