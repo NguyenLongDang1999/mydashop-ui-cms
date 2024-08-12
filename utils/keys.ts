@@ -25,6 +25,11 @@ export enum PRODUCT_COLLECTION_KEYS {
     CREATED_AT = 'created_at'
 }
 
+export enum PRODUCT_INVENTORY_KEYS {
+    NAME = 'name',
+    QUANTITY = 'quantity'
+}
+
 export enum PRODUCT_KEYS {
     NAME = 'name',
     PRICE = 'price',
