@@ -104,6 +104,8 @@ const handleAttributeValues = (index: number) => {
 }
 
 const onSubmit = handleSubmit(async values => {
+    console.log(values)
+
     // await mutateAsync({
     //     id: values.id,
     //     name: values.name,
@@ -207,14 +209,14 @@ const onSubmit = handleSubmit(async values => {
 
                     <div class="col-span-12 flex flex-col gap-4">
                         <div
-                            v-for="(variant, index) in (product.product_variants as IProductVariants[])"
+                            v-for="(variant, index) in product.product_variants"
                             :key="variant.label"
                             class="grid grid-cols-12 gap-4"
                         >
                             <div class="md:col-span-3 sm:col-span-4 col-span-6">
                                 <FormToggle
-                                    v-model="variant.is_default"
                                     label="Mặc định"
+                                    :model-value="variant.is_default"
                                     :name="`product_variants[${index}].is_default`"
                                     :label-toggle="variant.label"
                                     @update:model-value="handleIsDefault(index)"
@@ -223,7 +225,6 @@ const onSubmit = handleSubmit(async values => {
 
                             <div class="md:col-span-3 sm:col-span-4 col-span-6">
                                 <FormInput
-                                    v-model="variant.sku"
                                     :label="productLabel.sku"
                                     :name="`product_variants[${index}].sku`"
                                 />
@@ -231,7 +232,6 @@ const onSubmit = handleSubmit(async values => {
 
                             <div class="md:col-span-3 sm:col-span-4 col-span-6">
                                 <FormSelect
-                                    v-model="variant.manage_inventory"
                                     :label="productLabel.manage_inventory"
                                     :options="optionManageInventory"
                                     :name="`product_variants[${index}].manage_inventory`"
