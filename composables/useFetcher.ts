@@ -88,8 +88,10 @@ const handle401Error = async () => {
 }
 
 const removeCookie = () => {
+    const accessTokenAdmin = useCookie('accessTokenAdmin')
     const refreshTokenAdmin = useCookie('refreshTokenAdmin')
 
+    accessTokenAdmin.value = null
     refreshTokenAdmin.value = null
 
     navigateTo(ROUTER.LOGIN)
