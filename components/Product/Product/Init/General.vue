@@ -141,6 +141,13 @@ const isPercent = computed(() => areValuesEqual(product.special_price_type as nu
 
         <div class="md:col-span-4 sm:col-span-6 col-span-12">
             <FormInput
+                :label="productLabel.sku"
+                name="sku"
+            />
+        </div>
+
+        <div class="md:col-span-4 sm:col-span-6 col-span-12">
+            <FormInput
                 :label="productLabel.name"
                 name="name"
             />

@@ -87,10 +87,6 @@ export const productSingleForm = v.object({
 export const productVariants = v.object({
     is_default: v.boolean(),
     label: v.optional(v.string()),
-    sku: v.pipe(
-        v.string(`${productLabel.sku} không được bỏ trống.`),
-        v.nonEmpty(`${productLabel.sku} không được bỏ trống.`)
-    ),
     price: v.number(`${productLabel.price} không được bỏ trống.`),
     quantity: v.number(`${productLabel.quantity} không được bỏ trống.`),
     special_price_type: v.number(`${productLabel.special_price_type} không được bỏ trống.`),
@@ -118,6 +114,10 @@ export const productRelationsForm = v.object({
 
 export const productVariantForm = v.object({
     id: v.optional(v.string()),
+    sku: v.pipe(
+        v.string(`${productLabel.sku} không được bỏ trống.`),
+        v.nonEmpty(`${productLabel.sku} không được bỏ trống.`)
+    ),
     name: v.pipe(
         v.string(`${productLabel.name} không được bỏ trống.`),
         v.nonEmpty(`${productLabel.name} không được bỏ trống.`)
@@ -174,7 +174,7 @@ export const productVariantForm = v.object({
         v.array(productVariants, `${productLabel.attribute.name} phải có ít nhất 1 giá trị.`),
         v.minLength(1, `${productLabel.attribute.name} phải có ít nhất 1 giá trị.`)
     ),
-    product_images: v.array(productImagesForm),
+    product_images: v.optional(v.array(productImagesForm)),
     status: v.optional(v.number()),
     image_uri: v.nullish(v.string()),
     meta_title: v.optional(v.string()),
