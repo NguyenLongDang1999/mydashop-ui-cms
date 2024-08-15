@@ -186,6 +186,10 @@ export const productVariantForm = v.object({
 
 export const productUpdateGeneralVariantForm = v.object({
     id: v.optional(v.string()),
+    sku: v.pipe(
+        v.string(`${productLabel.sku} không được bỏ trống.`),
+        v.nonEmpty(`${productLabel.sku} không được bỏ trống.`)
+    ),
     name: v.pipe(
         v.string(`${productLabel.name} không được bỏ trống.`),
         v.nonEmpty(`${productLabel.name} không được bỏ trống.`)
@@ -193,10 +197,6 @@ export const productUpdateGeneralVariantForm = v.object({
     slug: v.pipe(
         v.string(`${productLabel.slug} không được bỏ trống.`),
         v.nonEmpty(`${productLabel.slug} không được bỏ trống.`)
-    ),
-    product_category_id: v.pipe(
-        v.string(`${productLabel.product_category_id} không được bỏ trống.`),
-        v.nonEmpty(`${productLabel.product_category_id} không được bỏ trống.`)
     ),
     description: v.pipe(
         v.string(`${productLabel.description} không được bỏ trống.`),
@@ -217,33 +217,7 @@ export const productUpdateGeneralVariantForm = v.object({
             })
         )
     ),
-    product_attribute_id: v.pipe(
-        v.array(v.string(), `${productLabel.attribute.name} không được bỏ trống.`),
-        v.minLength(1, `${productLabel.attribute.name} không được bỏ trống.`)
-    ),
-    product_attributes: v.pipe(
-        v.array(
-            v.object({
-                id: v.optional(v.string()),
-                name: v.pipe(
-                    v.string(`${productLabel.attribute.name} không được bỏ trống.`),
-                    v.nonEmpty(`${productLabel.attribute.name} không được bỏ trống.`)
-                ),
-                values: v.pipe(
-                    v.array(v.string(), `${productLabel.attribute.values} không được bỏ trống.`),
-                    v.minLength(1, `${productLabel.attribute.values} không được bỏ trống.`)
-                )
-            }),
-            `${productLabel.attribute.name} phải có ít nhất 1 giá trị.`
-        ),
-        v.minLength(1, `${productLabel.attribute.name} phải có ít nhất 1 giá trị.`)
-    ),
-    product_variants: v.pipe(
-        v.array(productVariants, `${productLabel.attribute.name} phải có ít nhất 1 giá trị.`),
-        v.minLength(1, `${productLabel.attribute.name} phải có ít nhất 1 giá trị.`)
-    ),
     is_variant: v.optional(v.boolean(), true),
-    product_brand_id: v.optional(v.string()),
     status: v.optional(v.number()),
     meta_title: v.optional(v.string()),
     meta_description: v.optional(v.string())

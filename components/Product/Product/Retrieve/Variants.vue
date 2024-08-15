@@ -66,7 +66,6 @@ const generateProductVariants = () => {
                 combinations.push({
                     is_default: areValuesEqual(combinations.length, 0),
                     label: currentCombination.map(item => item.name).join(' - '),
-                    sku: '',
                     price: 0,
                     manage_inventory: MANAGE_INVENTORY.NO,
                     quantity: 0,
@@ -220,13 +219,6 @@ const onSubmit = handleSubmit(async values => {
                                     :name="`product_variants[${index}].is_default`"
                                     :label-toggle="variant.label"
                                     @update:model-value="handleIsDefault(index)"
-                                />
-                            </div>
-
-                            <div class="md:col-span-3 sm:col-span-4 col-span-6">
-                                <FormInput
-                                    :label="productLabel.sku"
-                                    :name="`product_variants[${index}].sku`"
                                 />
                             </div>
 
