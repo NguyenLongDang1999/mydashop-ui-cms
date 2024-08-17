@@ -223,6 +223,40 @@ export const productUpdateGeneralVariantForm = v.object({
     meta_description: v.optional(v.string())
 })
 
+export const productUpdateVariantAttributeForm = v.object({
+    id: v.optional(v.string()),
+    product_category_id: v.pipe(
+        v.string(`${productLabel.product_category_id} không được bỏ trống.`),
+        v.nonEmpty(`${productLabel.product_category_id} không được bỏ trống.`)
+    ),
+    product_attribute_id: v.pipe(
+        v.array(v.string(), `${productLabel.attribute.name} không được bỏ trống.`),
+        v.minLength(1, `${productLabel.attribute.name} không được bỏ trống.`)
+    ),
+    product_attributes: v.pipe(
+        v.array(
+            v.object({
+                id: v.optional(v.string()),
+                name: v.pipe(
+                    v.string(`${productLabel.attribute.name} không được bỏ trống.`),
+                    v.nonEmpty(`${productLabel.attribute.name} không được bỏ trống.`)
+                ),
+                values: v.pipe(
+                    v.array(v.string(), `${productLabel.attribute.values} không được bỏ trống.`),
+                    v.minLength(1, `${productLabel.attribute.values} không được bỏ trống.`)
+                )
+            }),
+            `${productLabel.attribute.name} phải có ít nhất 1 giá trị.`
+        ),
+        v.minLength(1, `${productLabel.attribute.name} phải có ít nhất 1 giá trị.`)
+    ),
+    product_variants: v.pipe(
+        v.array(productVariants, `${productLabel.attribute.name} phải có ít nhất 1 giá trị.`),
+        v.minLength(1, `${productLabel.attribute.name} phải có ít nhất 1 giá trị.`)
+    ),
+    product_brand_id: v.optional(v.string())
+})
+
 export const productSearch = v.object({
     ...paginationSchema.entries,
     sku: v.optional(v.string()),
@@ -258,6 +292,8 @@ export const productVariantFormSchema = toTypedSchema(productVariantForm)
 
 export const productUpdateGeneralVariantFormSchema = toTypedSchema(productUpdateGeneralVariantForm)
 
+export const productUpdateVariantAttributeFormSchema = toTypedSchema(productUpdateVariantAttributeForm)
+
 export const productRelationsFormSchema = toTypedSchema(productRelationsForm)
 
 export const productSearchSchema = toTypedSchema(productSearch)
@@ -272,6 +308,8 @@ export type IProductVariants = v.InferInput<typeof productVariants>
 export type IProductVariantForm = v.InferInput<typeof productVariantForm>
 
 export type IProductUpdateGeneralVariantForm = v.InferInput<typeof productUpdateGeneralVariantForm>
+
+export type IProductUpdateVariantAttributeForm = v.InferInput<typeof productUpdateVariantAttributeForm>
 
 export type IProductRelationsForm = v.InferInput<typeof productRelationsForm>
 

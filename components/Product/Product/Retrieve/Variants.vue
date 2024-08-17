@@ -16,8 +16,8 @@ const attributeIdList = computed(() => product.product_attribute_id || [])
 const productCategoryId = computed(() => product.product_category_id || '')
 const productAttributes = computed(() => product.product_attributes || [])
 
-const { handleSubmit, setFieldValue } = useForm<IProductUpdateGeneralVariantForm>({
-    validationSchema: productUpdateGeneralVariantFormSchema,
+const { handleSubmit, setFieldValue } = useForm<IProductUpdateVariantAttributeForm>({
+    validationSchema: productUpdateVariantAttributeFormSchema,
     initialValues: _omitBy(props.data, _isNil)
 })
 
@@ -118,7 +118,7 @@ const onSubmit = handleSubmit(async values => {
 
 <template>
     <UForm
-        :state="productUpdateGeneralVariantFormSchema"
+        :state="productUpdateVariantAttributeFormSchema"
         @submit="onSubmit"
     >
         <UCard
