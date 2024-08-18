@@ -33,6 +33,7 @@ export const settingSystemForm = v.object({
         v.string(`${settingSystemLabel.value} không được bỏ trống.`),
         v.nonEmpty(`${settingSystemLabel.value} không được bỏ trống.`)
     ),
+    redis_key: v.optional(v.string()),
     description: v.optional(v.string()),
     input_type: v.number(`${settingSystemLabel.value} không được bỏ trống.`),
     setting_system_options: v.optional(
@@ -71,16 +72,13 @@ export const settingSystemSliderForm = v.object({
     )
 })
 
-export const settingSystemProductCollectionForm = v.object({
-    selected_product_collection_id: v.string(),
-    product_collection_id: v.array(v.string()),
-    product_collection: v.array(
-        v.object({
-            product_collection_id: v.string(),
-            product_id: v.array(v.string())
-        })
-    )
-})
+export const settingSystemProductCollectionForm = v.intersect([
+    v.object({
+        selected_product_collection_id: v.string(),
+        product_collection_id: v.array(v.string())
+    }),
+    v.record(v.string(), v.union([v.string(), v.array(v.string())]))
+])
 
 export const metadata = v.object({
     theme_colour: v.string(),

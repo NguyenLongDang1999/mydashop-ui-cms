@@ -25,6 +25,14 @@ export enum PRODUCT_COLLECTION_KEYS {
     CREATED_AT = 'created_at'
 }
 
+export enum PRODUCT_FLASH_DEALS_KEYS {
+    NAME = 'name',
+    PRICE = 'price',
+    DATE_RANGE = 'date_range',
+    STATUS = 'status',
+    CREATED_AT = 'created_at'
+}
+
 export enum PRODUCT_INVENTORY_KEYS {
     NAME = 'name',
     QUANTITY = 'quantity'

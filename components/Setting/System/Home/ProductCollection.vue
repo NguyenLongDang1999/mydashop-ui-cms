@@ -11,14 +11,18 @@ const props = defineProps<Props>()
 const productCollection = computed(() => props.data.find(_p => areValuesEqual(_p.key, HOME_SETTING.PRODUCT_COLLECTION)))
 const productCollectionValue = computed(() => typeof productCollection.value?.value === 'string' ? JSON.parse(productCollection.value?.value)?.product_collection : [])
 
-const product_collection = computed(() => ({
-    product_collection_id: productCollectionValue.value.map((_p: { product_collection_id: string }) => _p.product_collection_id),
-    selected_product_collection_id: productCollectionValue.value[0]?.product_collection_id,
-    product_collection: productCollectionValue.value.map((_c: { product_collection_id: string, product_id: string[] }) => ({
-        product_collection_id: _c.product_collection_id,
-        product_id: _c.product_id
-    }))
-}))
+const product_collection = computed(() => {
+    const result: ISettingSystemProductCollectionForm  = {
+        product_collection_id: productCollectionValue.value.map((_p: { product_collection_id: string }) => _p.product_collection_id),
+        selected_product_collection_id: productCollectionValue.value[0]?.product_collection_id
+    }
+
+    productCollectionValue.value.forEach((_c: { product_collection_id: string, product_id: string[] }) => {
+        result[_c.product_collection_id] = _c.product_id
+    })
+
+    return result
+})
 
 // ** useHooks
 const productCollectionList = useProductCollectionDataList()
@@ -31,6 +35,7 @@ const { handleSubmit, values: collection } = useForm({
 
 // ** Computed
 const productCollectionSelected = computed(() => productCollectionList.value.filter(_p => collection.product_collection_id?.includes(_p.id)))
+const productIdCollection = computed(() => productCollectionList.value.find(_collection => areValuesEqual(_collection.id, collection.selected_product_collection_id as string))?.product_id || [])
 
 // ** Methods
 const onSubmit = handleSubmit(values => mutateAsync({
@@ -39,9 +44,10 @@ const onSubmit = handleSubmit(values => mutateAsync({
     value: JSON.stringify({
         product_collection: values.product_collection_id.map(_p => ({
             product_collection_id: _p,
-            product_id: values.product_collection.find(pc => pc.product_collection_id === _p)?.product_id || []
+            product_id: collection[_p]
         }))
     }),
+    redis_key: 'home_',
     input_type: INPUT_TYPE.TEXT
 }))
 </script>
@@ -103,7 +109,6 @@ const onSubmit = handleSubmit(values => mutateAsync({
 
             <div class="col-span-12">
                 <FormSelect
-                    :model-value="productCollectionSelected[0]?.id"
                     :options="productCollectionSelected"
                     label="Chọn bộ sưu tập"
                     name="selected_product_collection_id"
@@ -117,7 +122,8 @@ const onSubmit = handleSubmit(values => mutateAsync({
             >
                 <FormSelectedProduct
                     v-show="areValuesEqual(item, collection.selected_product_collection_id as string)"
-                    :name="`${item}-product_id`"
+                    :name="item"
+                    :product-id-collection="productIdCollection.join(',')"
                 />
             </div>
 

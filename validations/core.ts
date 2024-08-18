@@ -42,10 +42,17 @@ export const countSchema = v.required(
     })
 )
 
+export const dateRangeSchema = v.object({
+    start_date: v.optional(v.date()),
+    end_date: v.optional(v.date())
+})
+
 // ** Types
 export type IDeleteRecord = v.InferInput<typeof deleteRecordSchema>
 
 export type IPagination = v.InferInput<typeof paginationSchema>
+
+export type IDateRange = v.InferInput<typeof dateRangeSchema>
 
 export type IOptions = v.InferInput<typeof optionsSchema>
 

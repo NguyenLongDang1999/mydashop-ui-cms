@@ -266,13 +266,17 @@ export const productSearch = v.object({
     status: v.optional(v.number()),
     product_type: v.optional(v.number()),
     not_flash_deals: v.optional(v.boolean()),
-    product_id_flash_deals: v.optional(v.string())
+    product_id_flash_deals: v.optional(v.string()),
+    product_id_collection: v.optional(v.string())
 })
 
 export const product = v.object({
     id: v.string(),
     sku: v.string(),
     name: v.string(),
+    title: v.string(),
+    discounted_price: v.string(),
+    discounted_price_type: v.number(),
     slug: v.string(),
     price: v.number(),
     quantity: v.number(),

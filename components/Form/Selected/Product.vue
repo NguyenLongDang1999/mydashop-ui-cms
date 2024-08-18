@@ -5,6 +5,7 @@ interface Props {
     name: string
     notFlashDeals?: boolean
     productIdFlashDeals?: string
+    productIdCollection?: string
 }
 
 const props = defineProps<Props>()
@@ -14,7 +15,7 @@ const { errorMessage, value, setValue } = useField<string[]>(() => props.name, u
     syncVModel: true
 })
 
-const { productCategoryId, productBrandId, isFetching, dataTable, dataAggregations } = useProductDataTable()
+const { search, productCategoryId, productBrandId, isFetching, dataTable, dataAggregations } = useProductDataTable(props.notFlashDeals, props.productIdFlashDeals)
 
 // ** Data
 const product_id = value.value || []
@@ -28,6 +29,7 @@ const error = computed(() => errorMessage.value)
 
 // ** Watch
 watch(selected, newValue => setValue(newValue.map(_s => _s.id)))
+watch(() => props.productIdCollection, () => search.product_id_collection = props.productIdCollection)
 watchEffect(() => selected.value = dataTable.value.filter(_d => product_id.includes(_d.id)))
 </script>
 
@@ -55,6 +57,7 @@ watchEffect(() => selected.value = dataTable.value.filter(_d => product_id.inclu
                         v-if="areValuesEqual(column.key, PRODUCT_KEYS.NAME)"
                         :to="goToPage(ROUTER.PRODUCT_GENERAL, row.id, ROUTER.PRODUCT)"
                         :name="row.name"
+                        :title="row.title"
                         :image="row.image_uri"
                         :count="row.sku"
                         :has-flash-deals="row.hasFlashDeals"

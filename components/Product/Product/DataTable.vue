@@ -41,6 +41,7 @@ watchEffect(() => emits('dataTable', dataTable.value))
             v-if="areValuesEqual(column.key, PRODUCT_KEYS.NAME)"
             :to="goToPage(ROUTER.PRODUCT_GENERAL, row.id, ROUTER.PRODUCT)"
             :name="row.name"
+            :title="row.title"
             :image="row.image_uri"
             :count="row.sku"
             :has-flash-deals="row.hasFlashDeals"

@@ -4,11 +4,12 @@ export default defineNuxtConfig({
     devtools: { enabled: true },
     modules: [
         '@nuxt/ui',
+        '@nuxt/image',
         '@nuxtjs/google-fonts',
         '@vee-validate/nuxt',
         '@vueuse/nuxt',
-        'nuxt-lodash',
-        '@nuxt/image'
+        '@samk-dev/nuxt-vcalendar',
+        'nuxt-lodash'
     ],
     ssr: false,
     googleFonts: {

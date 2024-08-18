@@ -35,7 +35,8 @@ export const productCollectionSearch = v.object({
 
 export const productCollectionList = v.object({
     id: v.string(),
-    name: v.string()
+    name: v.string(),
+    product_id: v.array(v.string())
 })
 
 export const productCollection = v.object({

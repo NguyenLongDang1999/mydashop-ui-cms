@@ -2,8 +2,6 @@
 
 // ** useHooks
 const { data } = await useProductCollectionRetrieve()
-
-// ** useHooks
 const { isPending, mutateAsync } = useProductCollectionFormInput()
 
 const { handleSubmit, setFieldValue } = useForm<IProductCollectionForm>({

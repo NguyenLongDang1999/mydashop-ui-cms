@@ -3,14 +3,9 @@ import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tansta
 
 // ** Types Imports
 import type { VerticalNavigationLink } from '#ui/types'
-import type { IProductTable } from '~/types/product.type'
-
-// ** Validations Imports
-import type { IProductGenerateVariants } from '~/validations/product-flash-deals'
 
 // ** State
 const path = ref<string>(ROUTE.PRODUCT)
-const productVariants = ref<IProductGenerateVariants[]>([])
 
 const queryKey = {
     dataTable: `${path.value}-data-table`,
@@ -28,8 +23,7 @@ const pathKey = {
     idUpdateVariants: `${path.value}/$id/update-variants`,
     dataList: `${path.value}/data-list`,
     idImages: `${path.value}/$id/images`,
-    idRelations: `${path.value}/$id/relations`,
-    generateVariant: `${path.value}/generate-variant`
+    idRelations: `${path.value}/$id/relations`
 }
 
 export const productColumns: Columns[] = [
@@ -71,8 +65,7 @@ export const productColumns: Columns[] = [
 
 export default function () {
     return {
-        path,
-        productVariants
+        path
     }
 }
 
@@ -271,12 +264,3 @@ export const useProductSelectedWithCategory = (product_category_id: ComputedRef<
         isFetchingAttribute
     }
 }
-
-export const useProductFormGenerateVariant = () => useMutation<IProductGenerateVariants[], Error, { product_id: string[] }>({
-    mutationFn: body => useFetcher(pathKey.generateVariant, {
-        method: 'POST',
-        body
-    }),
-    onSuccess: data => productVariants.value = data,
-    onError: () => useNotificationError(MESSAGE.ERROR)
-})

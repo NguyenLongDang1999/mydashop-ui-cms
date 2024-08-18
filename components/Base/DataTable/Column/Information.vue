@@ -4,6 +4,7 @@
 interface Props {
     to?: string
     name?: string
+    title?: string
     hasImage?: boolean
     hasFlashDeals?: boolean
     image?: string
@@ -19,7 +20,7 @@ defineProps<Props>()
             v-if="hasFlashDeals"
             color="red"
         >
-            Flash Deals
+            {{ title }}
         </UBadge>
 
         <div class="flex items-center gap-1">

@@ -25,6 +25,7 @@ const onSubmit = handleSubmit(values => mutateAsync({
     label: HOME_SETTING.SLIDER,
     key: HOME_SETTING.SLIDER,
     value: JSON.stringify(values.home_slider),
+    redis_key: 'home_',
     input_type: INPUT_TYPE.TEXT
 
 }))

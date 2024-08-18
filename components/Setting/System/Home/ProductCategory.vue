@@ -25,6 +25,7 @@ const onSubmit = handleSubmit(values => mutateAsync({
     label: HOME_SETTING.PRODUCT_CATEGORIES_POPULAR,
     key: HOME_SETTING.PRODUCT_CATEGORIES_POPULAR,
     value: JSON.stringify(values.product_category_id),
+    redis_key: 'home_',
     input_type: INPUT_TYPE.TEXT
 }))
 </script>
