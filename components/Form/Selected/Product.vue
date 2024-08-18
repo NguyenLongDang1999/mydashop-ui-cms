@@ -6,6 +6,7 @@ interface Props {
     notFlashDeals?: boolean
     productIdFlashDeals?: string
     productIdCollection?: string
+    flashDealsId?: string
 }
 
 const props = defineProps<Props>()
@@ -15,7 +16,7 @@ const { errorMessage, value, setValue } = useField<string[]>(() => props.name, u
     syncVModel: true
 })
 
-const { search, productCategoryId, productBrandId, isFetching, dataTable, dataAggregations } = useProductDataTable(props.notFlashDeals, props.productIdFlashDeals)
+const { search, productCategoryId, productBrandId, isFetching, dataTable, dataAggregations } = useProductDataTable(props.notFlashDeals, props.productIdFlashDeals, props.flashDealsId)
 
 // ** Data
 const product_id = value.value || []
@@ -29,6 +30,7 @@ const error = computed(() => errorMessage.value)
 
 // ** Watch
 watch(selected, newValue => setValue(newValue.map(_s => _s.id)))
+watch(() => props.flashDealsId, () => search.flash_deals_id = props.flashDealsId)
 watch(() => props.productIdCollection, () => search.product_id_collection = props.productIdCollection)
 watchEffect(() => selected.value = dataTable.value.filter(_d => product_id.includes(_d.id)))
 </script>

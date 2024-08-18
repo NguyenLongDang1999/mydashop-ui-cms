@@ -45,6 +45,11 @@ export const productFlashDealsSearch = v.object({
     status: v.optional(v.number())
 })
 
+export const productFlashDealsList = v.object({
+    id: v.string(),
+    name: v.string()
+})
+
 export const productFlashDeals = v.object({
     id: v.string(),
     title: v.string(),
@@ -70,6 +75,8 @@ export const productFlashDealsSearchSchema = toTypedSchema(productFlashDealsSear
 export type IProductFlashDealsForm = v.InferInput<typeof productFlashDealsForm>
 
 export type IProductFlashDealsSearch = v.InferInput<typeof productFlashDealsSearch>
+
+export type IProductFlashDealsList = v.InferInput<typeof productFlashDealsList>
 
 export type IProductFlashDeals = v.InferInput<typeof productFlashDeals>
 

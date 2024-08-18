@@ -90,6 +90,16 @@ export const useProductFlashDealsRetrieve = async () => {
     }
 }
 
+export const useProductFlashDealsDataList = () => {
+    // ** useHooks
+    const { data } = useQuery<IProductFlashDealsList[]>({
+        queryKey: [queryKey.dataList],
+        queryFn: () => useFetcher(pathKey.dataList)
+    })
+
+    return computed(() => data.value || [])
+}
+
 export const useProductFlashDealsFormInput = () => {
     const queryClient = useQueryClient()
 

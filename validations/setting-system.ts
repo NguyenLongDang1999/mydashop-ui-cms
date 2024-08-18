@@ -80,6 +80,11 @@ export const settingSystemProductCollectionForm = v.intersect([
     v.record(v.string(), v.union([v.string(), v.array(v.string())]))
 ])
 
+export const settingSystemProductFlashDealsForm = v.object({
+    flash_deals_id: v.string(),
+    product_id: v.array(v.string())
+})
+
 export const metadata = v.object({
     theme_colour: v.string(),
     system: v.array(settingSystemForm)
@@ -93,6 +98,8 @@ export const settingSystemProductCategoryFormSchema = toTypedSchema(settingSyste
 
 export const settingSystemProductCollectionFormSchema = toTypedSchema(settingSystemProductCollectionForm)
 
+export const settingSystemProductFlashDealsFormSchema = toTypedSchema(settingSystemProductFlashDealsForm)
+
 // ** Types
 export type ISettingSystemForm = v.InferInput<typeof settingSystemForm>
 
@@ -101,5 +108,7 @@ export type ISettingSystemSliderForm = v.InferInput<typeof settingSystemSliderFo
 export type ISettingSystemProductCategoryForm = v.InferInput<typeof settingSystemProductCategoryForm>
 
 export type ISettingSystemProductCollectionForm = v.InferInput<typeof settingSystemProductCollectionForm>
+
+export type ISettingSystemProductFlashDealsForm = v.InferInput<typeof settingSystemProductFlashDealsForm>
 
 export type IMetadata = v.InferInput<typeof metadata>
