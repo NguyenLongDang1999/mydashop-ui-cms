@@ -36,7 +36,7 @@ watchEffect(() => emits('dataTable', dataTable.value))
 
                 <div class="flex flex-col flex-1 truncate">
                     <span class="capitalize text-primary truncate">{{ row.product.name }}</span>
-                    <strong>SKU: {{ row.sku }}</strong>
+                    <strong>SKU: {{ row.product.sku }}</strong>
                     <span>{{ row.label }}</span>
                 </div>
             </div>

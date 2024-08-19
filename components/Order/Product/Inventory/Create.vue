@@ -70,7 +70,7 @@ const onSubmit = handleSubmit(async values => {
 
                                 <div class="flex flex-col flex-1 truncate">
                                     <span class="capitalize text-primary truncate">{{ productInventory.product.name }}</span>
-                                    <span>{{ productInventory.sku }}</span>
+                                    <strong>SKU: {{ productInventory.product.sku }}</strong>
                                     <span>{{ productInventory.label }}</span>
                                 </div>
                             </div>
