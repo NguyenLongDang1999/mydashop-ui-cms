@@ -15,7 +15,10 @@ const inputTypeIsSelect = computed(() => areValuesEqual(setting.input_type, INPU
 
 // ** Methods
 const onSubmit = handleSubmit(async values => {
-    await mutateAsync(values)
+    await mutateAsync({
+        ...values,
+        redis_key: 'system_'
+    })
     isOpen.value = false
 })
 </script>
