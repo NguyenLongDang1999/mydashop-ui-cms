@@ -19,7 +19,7 @@ const { isPending, mutateAsync } = useProductCollectionFormDelete()
             v-if="areValuesEqual(column.key, PRODUCT_COLLECTION_KEYS.NAME)"
             :to="goToPage(row.id, ROUTER.PRODUCT_COLLECTION)"
             :name="row.title"
-            :count="`${row.product.length} Sản Phẩm`"
+            :count="`${row._count.productCollectionProduct} Sản Phẩm`"
         />
 
         <UToggle

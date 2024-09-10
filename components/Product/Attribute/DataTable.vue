@@ -30,7 +30,7 @@ if (productCategoryId) {
             v-if="areValuesEqual(column.key, PRODUCT_ATTRIBUTE_KEYS.NAME)"
             :to="goToPage(ROUTER.PRODUCT_GENERAL, row.id, ROUTER.PRODUCT_ATTRIBUTE)"
             :name="row.name"
-            :count="`${row.productAttributeValues.length} Giá Trị`"
+            :count="`${row._count.productAttributeValues} Giá Trị`"
         />
 
         <template v-if="areValuesEqual(column.key, PRODUCT_ATTRIBUTE_KEYS.PRODUCT_CATEGORY_ID)">

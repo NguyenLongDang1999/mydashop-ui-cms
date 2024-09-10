@@ -31,7 +31,7 @@ if (productCategoryId) {
             :to="goToPage(ROUTER.PRODUCT_GENERAL, row.id, ROUTER.PRODUCT_BRAND)"
             :name="row.name"
             :image="row.image_uri"
-            :count="`${row.product.length} Sản Phẩm`"
+            :count="`${row._count.product} Sản Phẩm`"
             has-image
         />
 

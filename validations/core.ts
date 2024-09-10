@@ -38,7 +38,10 @@ export const aggregationsSchema = v.required(
 
 export const countSchema = v.required(
     v.object({
-        _count: v.optional(v.number())
+        _count: v.record(
+            v.string(),
+            v.number()
+        )
     })
 )
 

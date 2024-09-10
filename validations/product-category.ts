@@ -43,7 +43,7 @@ export const productCategoryList = v.object({
     id: v.string(),
     name: v.string(),
     image_uri: v.string(),
-    product: v.array(countSchema)
+    ...countSchema.entries
 })
 
 export const productCategory = v.object({

@@ -57,7 +57,7 @@ export const productAttribute = v.object({
     slug: v.string(),
     status: v.number(),
     created_at: v.string(),
-    productAttributeValues: v.array(countSchema),
+    ...countSchema.entries,
     productCategoryAttributes: v.array(productCategoryList)
 })
 

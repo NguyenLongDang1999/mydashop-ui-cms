@@ -34,7 +34,7 @@ watchEffect(() => emits('dataTable', dataTable.value))
             :to="goToPage(ROUTER.PRODUCT_GENERAL, row.id, ROUTER.PRODUCT_CATEGORY)"
             :name="row.name"
             :image="row.image_uri"
-            :count="`${row.product.length} Sản Phẩm`"
+            :count="`${row._count.product} Sản Phẩm`"
             has-image
         />
 
@@ -43,7 +43,7 @@ watchEffect(() => emits('dataTable', dataTable.value))
             :to="goToPage(ROUTER.PRODUCT_GENERAL, row.parentCategory.id, ROUTER.PRODUCT_CATEGORY)"
             :name="row.parentCategory.name"
             :image="row.parentCategory.image_uri"
-            :count="`${row.parentCategory.product.length} Sản Phẩm`"
+            :count="`${row.parentCategory._count.product} Sản Phẩm`"
             has-image
         />
 
