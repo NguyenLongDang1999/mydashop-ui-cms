@@ -7,6 +7,7 @@ export enum ROUTE {
     PRODUCT = 'product',
     FILE_MANAGER = 'file-manager',
     PRODUCT_COLLECTION = 'product-collections',
+    PRODUCT_COUPON = 'product-coupons',
     SYSTEM_SETTINGS = 'system-settings',
     PRODUCT_INVENTORY = 'product-inventory',
 }
