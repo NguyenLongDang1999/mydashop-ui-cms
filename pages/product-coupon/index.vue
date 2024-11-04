@@ -11,7 +11,7 @@
                     <ProductCouponCreate />
                 </template>
 
-                <!-- <ProductCollectionDataTable /> -->
+                <ProductCouponDataTable />
             </BaseDataTableCard>
         </div>
     </section>

@@ -16,16 +16,31 @@ const pathKey = {
 
 export const productCouponColumns: Columns[] = [
     {
-        key: PRODUCT_COLLECTION_KEYS.NAME,
-        label: 'Thông tin bộ sưu tập',
-        class: minWithColumn(250)
+        key: PRODUCT_COUPON_KEYS.CODE,
+        label: 'Code',
+        class: minWithColumn(180)
     },
     {
-        key: PRODUCT_COLLECTION_KEYS.STATUS,
+        key: PRODUCT_COUPON_KEYS.MIN_ORDER_VALUE,
+        label: 'Giá trị đơn hàng giảm',
+        class: minWithColumn(200)
+    },
+    {
+        key: PRODUCT_COUPON_KEYS.PRICE,
+        label: 'Giá giảm',
+        class: minWithColumn(100)
+    },
+    {
+        key: PRODUCT_COUPON_KEYS.DATE_RANGE,
+        label: 'Ngày áp dụng',
+        class: minWithColumn(350)
+    },
+    {
+        key: PRODUCT_COUPON_KEYS.STATUS,
         label: 'Trạng thái'
     },
     {
-        key: PRODUCT_COLLECTION_KEYS.CREATED_AT,
+        key: PRODUCT_COUPON_KEYS.CREATED_AT,
         label: 'Ngày tạo',
         class: minWithColumn(160)
     },

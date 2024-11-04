@@ -33,6 +33,15 @@ export enum PRODUCT_FLASH_DEALS_KEYS {
     CREATED_AT = 'created_at'
 }
 
+export enum PRODUCT_COUPON_KEYS {
+    CODE = 'code',
+    PRICE = 'price',
+    MIN_ORDER_VALUE = 'min_order_value',
+    DATE_RANGE = 'date_range',
+    STATUS = 'status',
+    CREATED_AT = 'created_at'
+}
+
 export enum PRODUCT_INVENTORY_KEYS {
     NAME = 'name',
     QUANTITY = 'quantity'
