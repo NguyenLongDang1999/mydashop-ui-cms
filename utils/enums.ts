@@ -5,6 +5,7 @@ export enum ROUTE {
     PRODUCT_ATTRIBUTE = 'product-attributes',
     PRODUCT_FLASH_DEALS = 'product-flash-deals',
     PRODUCT = 'product',
+    ORDERS = 'orders',
     FILE_MANAGER = 'file-manager',
     PRODUCT_COLLECTION = 'product-collections',
     PRODUCT_COUPON = 'product-coupons',
